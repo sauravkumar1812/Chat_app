@@ -17,7 +17,17 @@ const Login = () => {
           alignItems: "center",
         }}
       >
-        {isLogin ? <span>Login</span> : <span>Register</span>}
+        {isLogin ? (
+          <>
+            <Typography variant="h5"> Login</Typography>
+
+            <form>
+                <TextField></TextField>
+            </form>
+          </>
+        ) : (
+          <span>Register</span>
+        )}
       </paper>
     </Container>
   );
