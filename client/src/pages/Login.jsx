@@ -4,7 +4,7 @@ import { Container, Paper, Typography, TextField, Button } from "@mui/material";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
 
-  const toggleLogin = () => setIsLogin(false);
+  const toggleLogin = () => setIsLogin((prev) => !prev);
   return (
     <Container component="main" maxWidth="xs" sx={{
       height:"100vh",
@@ -23,7 +23,7 @@ const Login = () => {
       >
         {isLogin ? (
           <>
-            <Typography variant="h5">Login</Typography>
+            <Typography variant="h5">Log in</Typography>
 
             <form style={{
               width:"100%",
@@ -53,7 +53,7 @@ const Login = () => {
                 color="primary"
                 type="submit"
               >
-                Login
+                Log  in
               </Button>
               <Typography textAlign={"center"} m={"1rem"}>OR</Typography>
               <Button
@@ -64,12 +64,71 @@ const Login = () => {
                 variant="text"
                 onClick={toggleLogin}
               >
-                Sign up Instead
+                sign up Instead
               </Button>
             </form>
           </>
          ) : (
-          <span>register</span>
+          <>
+            <Typography variant="h5">Sign Up</Typography>
+
+            <form style={{
+              width:"100%",
+              marginTop:"1rem",
+            }}>
+               <TextField
+               required
+               fullWidth
+               label="Name"
+               margin="normal"
+               variant="outlined"
+              />
+               <TextField
+                required
+                fullWidth
+                label="Bio"
+                margin="normal"
+                variant="outlined"
+              />
+              <TextField
+                required
+                fullWidth
+                label="Username"
+                margin="normal"
+                variant="outlined"
+              />
+              <TextField
+                required
+                fullWidth
+                label="Password"
+                margin="normal"
+                type="password"
+                variant="outlined"
+              />
+              <Button
+                sx={{
+                  marginTop: "1rem",
+                }}
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
+                sign up
+              </Button>
+              <Typography textAlign={"center"} m={"1rem"}>OR</Typography>
+              <Button
+                // sx={{
+                //   marginTop: "1rem",
+                // }}
+                fullWidth
+                variant="text"
+                onClick={toggleLogin}
+              >
+                login up Instead
+              </Button>
+            </form>
+          </>
           )
         }
       </Paper>
