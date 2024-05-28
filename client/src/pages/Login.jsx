@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Container, Paper, Typography, TextField, Button } from "@mui/material";
-
+import { Container, Paper, Typography, TextField, Button, Avatar,Stack , IconButton } from "@mui/material";
+import {CameraAlt as CameraAltIcon} from "@mui/icons-material";
+import { VisualyHiddenInput } from "../components/styles/styledComponents";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
 
@@ -76,6 +77,31 @@ const Login = () => {
               width:"100%",
               marginTop:"1rem",
             }}>
+              <Stack position={"relative"} width={"10rem"} margin={"auto"}>
+                  <Avatar sx={{
+                     width:"10rem",
+                     height:"10rem",
+                     objectFit:"contain"
+                    }}/>
+                    {/* for selecting the file from device */}
+                    <IconButton sx={{
+                      position:"absolute",
+                      bottom:0,
+                      right:0,
+                      color:"white",
+                      bgcolor:"rgba(0,0,0,0.5)",
+                      ":hover":{
+                        bgcolor:"rgba(0,0,0,0.8)"
+                      }
+                    }}
+                    component="label"
+                    >
+                      <>
+                      <CameraAltIcon/>
+                      <VisualyHiddenInput type="file"/>
+                      </>
+                    </IconButton>
+              </Stack>
                <TextField
                required
                fullWidth
