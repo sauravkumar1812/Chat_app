@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Paper, Typography, TextField, Button, Avatar,Stack , IconButton } from "@mui/material";
 import {CameraAlt as CameraAltIcon} from "@mui/icons-material";
 import { VisualyHiddenInput } from "../components/styles/styledComponents";
-import {useInputValidation} from '6pp'
+import {useInputValidation,useStrongPassword} from '6pp'
 import { usernamevalidator } from "../utils/validators";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,7 +12,7 @@ const Login = () => {
   const name = useInputValidation("");
   const bio = useInputValidation("");
   const username = useInputValidation("",usernamevalidator);
-  const password = useInputValidation("");
+  const password = useStrongPassword();
 
 
   return (
@@ -159,6 +159,13 @@ const Login = () => {
                 value={password.value}
                 onChange={password.changeHandler}
               />
+               {
+                password.error && (
+                  <Typography color="error" variant="caption"> 
+               {password.error}
+                  </Typography>
+                )
+              }
               <Button
                 sx={{
                   marginTop: "1rem",
