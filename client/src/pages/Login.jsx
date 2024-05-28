@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Paper, Typography, TextField, Button, Avatar,Stack , IconButton } from "@mui/material";
 import {CameraAlt as CameraAltIcon} from "@mui/icons-material";
 import { VisualyHiddenInput } from "../components/styles/styledComponents";
-import {useInputValidation,useStrongPassword} from '6pp'
+import {useFileHandler, useInputValidation} from '6pp'
 import { usernamevalidator } from "../utils/validators";
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,8 +12,8 @@ const Login = () => {
   const name = useInputValidation("");
   const bio = useInputValidation("");
   const username = useInputValidation("",usernamevalidator);
-  const password = useStrongPassword();
-
+  const password = useInputValidation("");
+  const avatar = useFileHandler("single",)
 
   return (
     <Container component="main" maxWidth="xs" sx={{
@@ -95,7 +95,9 @@ const Login = () => {
                      width:"10rem",
                      height:"10rem",
                      objectFit:"contain"
-                    }}/>
+                    }}
+                    src={avatar.preview}
+                    />
                     {/* for selecting the file from device */}
                     <IconButton sx={{
                       position:"absolute",
@@ -111,7 +113,7 @@ const Login = () => {
                     >
                       <>
                       <CameraAltIcon/>
-                      <VisualyHiddenInput type="file"/>
+                      <VisualyHiddenInput type="file" onChange={avatar.changeHandler}/>
                       </>
                     </IconButton>
               </Stack>
@@ -159,13 +161,6 @@ const Login = () => {
                 value={password.value}
                 onChange={password.changeHandler}
               />
-               {
-                password.error && (
-                  <Typography color="error" variant="caption"> 
-               {password.error}
-                  </Typography>
-                )
-              }
               <Button
                 sx={{
                   marginTop: "1rem",
