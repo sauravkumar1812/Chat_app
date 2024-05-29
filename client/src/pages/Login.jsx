@@ -22,6 +22,11 @@ const Login = () => {
   const avatar = useFileHandler("single",)
 
   return (
+    <div 
+    style={{
+      backgroundImage:"linear-gradient(rgb(219 76 76 / 50%), rgb(81 74 150 / 50%))",
+    }}
+    >
     <Container component="main" maxWidth="xs" sx={{
       height:"100vh",
       display:"flex",
@@ -97,8 +102,9 @@ const Login = () => {
             <form style={{
               width:"100%",
               marginTop:"1rem",
-            }}>
-              onSubmit = {handleSignUp}
+            }}
+            onSubmit = {handleSignUp}
+            >
               <Stack position={"relative"} width={"10rem"} margin={"auto"}>
                   <Avatar sx={{
                      width:"10rem",
@@ -206,6 +212,7 @@ const Login = () => {
         }
       </Paper>
     </Container>
+    </div>
   );
 };
 
