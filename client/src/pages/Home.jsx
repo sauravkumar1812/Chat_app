@@ -1,5 +1,5 @@
 import React from 'react'
-import Applayout from '../components/layout/Applayout';
+import AppLayout from '../components/layout/AppLayout';
 
 const Home = () => {
   return  <div>Home</div>
@@ -7,5 +7,5 @@ const Home = () => {
 };
 
 
-export default Applayout()(Home);
+export default AppLayout()(Home);
 
