@@ -7,6 +7,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Chat = lazy(() => import("./pages/Chat"));
 const Groups = lazy(() => import("./pages/Groups"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
 let user = true;
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Routes>
         <Route element={<ProtectRoute user={user} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/chat:chatId" element={<Chat />} />
+          <Route path="/chat/:Id" element={<Chat />} />
           <Route path="/groups" element={<Groups />} />
         </Route>
 
