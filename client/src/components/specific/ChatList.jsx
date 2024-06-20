@@ -1,6 +1,7 @@
 import React from "react";
 import { Stack } from "@mui/material";
 import ChatItem from "../shared/ChatItem";
+
 const ChatList = ({
   width = "100%",
   chats = [],
@@ -19,7 +20,7 @@ const ChatList = ({
       {chats?.map((data, index) => {
         const { avatar, _id, name, groupChat, members } = data;
         const newMessageAlert = newMessagesAlert.find(
-         alert  => alert.chatId === _id
+          chatId  => alert.chatId === _id
         );
         const isOnline = members?.some((member) => onlineusers.includes(_id));
         return (
