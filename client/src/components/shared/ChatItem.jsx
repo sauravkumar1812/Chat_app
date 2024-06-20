@@ -1,6 +1,7 @@
 import React,{memo} from "react";
 import { Link} from "../styles/styledComponents";
 import { Box, Stack, Typography } from "@mui/material";
+import AvatarCard from "./AvatarCard";
 
 const ChatItem = ({
   avatar = [],
