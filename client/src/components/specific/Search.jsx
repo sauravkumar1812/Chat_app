@@ -1,9 +1,10 @@
 import React from "react";
-import { Dialog, DialogTitle, InputAdornment, Stack, TextField } from "@mui/material";
+import { Dialog, DialogTitle, InputAdornment, Stack, TextField ,List, ListItem} from "@mui/material";
 import { useInputValidation } from "6pp";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SearchDialog = () => {
+  const users = [1,2,3]
   const search = useInputValidation("");
   return (
     <Dialog open>
@@ -23,6 +24,13 @@ const SearchDialog = () => {
             )
           }}
         />
+        <List>
+         { users.map((user)=>{
+        <ListItem>
+          <ListItemtext/>
+        </ListItem>
+          })}
+        </List>
       </Stack>
     </Dialog>
   );
