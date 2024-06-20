@@ -18,7 +18,16 @@ const AppLayout = () => (WrappedComponent) => {
             sx={{ display: { xs: "none", sm: "block" } }}
             height={"100%"}
           >
-            <Chatlist chats={samplechats} chatId={"1"}/>
+            <Chatlist
+              chats={samplechats}
+              chatId={"1"}
+              newMessagesAlert={[
+                {
+                  chatId: "1",
+                  count: 99,
+                },
+              ]}
+            />
           </Grid>
           <Grid item xs={12} sm={8} md={5} lg={6} height={"100%"}>
             <WrappedComponent {...props} />
