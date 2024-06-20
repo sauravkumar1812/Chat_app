@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "../styles/styledComponents";
+import { Link,Typography} from "../styles/styledComponents";
+import { Stack } from "@mui/material";
 
 const ChatItem = ({
   avatar = [],
@@ -24,7 +25,11 @@ const ChatItem = ({
           color: sameSender ? "white" : "unset",
           position: "relative",
         }}
-      ></div>
+      >
+        <Stack>
+            <Typography></Typography>
+        </Stack>
+      </div>
     </Link>
   );
 };
