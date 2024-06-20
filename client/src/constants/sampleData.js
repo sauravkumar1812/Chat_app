@@ -7,6 +7,8 @@
   _id:"1",
   groupChat:false,
   members:["1","2"],
+},
+{
   avatar:[
     "https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"
       ],

@@ -11,10 +11,10 @@ const ChatItem = ({
   isOnline,
   newMessageAlert,
   index = 0,
-  handleDeleteChatOpen,
+  handleDeleteChat,
 }) => {
   return (
-    <Link to={`/chat/${_id}`} onContextMenu={(e)=> handleDeleteChatOpen(e,_id,groupChat)}>
+    <Link to={`/chat/${_id}`} onContextMenu={(e)=> handleDeleteChat(e,_id,groupChat)}>
       <div
         style={{
           display: "flex",
@@ -26,6 +26,7 @@ const ChatItem = ({
           position: "relative",
         }}
       >
+        <AvatarCard avatar={avatar}/>
         <Stack>
           <Typography>{name}</Typography>
           {newMessageAlert && (
