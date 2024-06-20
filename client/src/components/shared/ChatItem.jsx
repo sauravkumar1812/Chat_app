@@ -1,6 +1,6 @@
 import React from "react";
-import { Link,Typography} from "../styles/styledComponents";
-import { Stack } from "@mui/material";
+import { Link, Typography } from "../styles/styledComponents";
+import { Box, Stack } from "@mui/material";
 
 const ChatItem = ({
   avatar = [],
@@ -9,7 +9,7 @@ const ChatItem = ({
   groupChat = false,
   sameSender,
   isOnlinne,
-  newMessage,
+  newMessageAlert,
   index = 0,
   handleDeleteChatOpen,
 }) => {
@@ -27,8 +27,25 @@ const ChatItem = ({
         }}
       >
         <Stack>
-            <Typography></Typography>
+          <Typography>{name}</Typography>
+          {newMessageAlert && (
+            <Typography>{newMessageAlert.count} New Message</Typography>
+          )}
         </Stack>
+        {isOnline && (
+          <Box
+            sx={{
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              backgroundColor: "green",
+              position: "absolute",
+              top: "50%",
+              right: "1rem",
+              transform: "translateY(-50%)",
+            }}
+          />
+        )}
       </div>
     </Link>
   );
