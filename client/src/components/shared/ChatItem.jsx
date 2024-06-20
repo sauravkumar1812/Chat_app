@@ -1,5 +1,5 @@
-import React,{memo} from "react";
-import { Link} from "../styles/styledComponents";
+import React, { memo } from "react";
+import { Link } from "../styles/styledComponents";
 import { Box, Stack, Typography } from "@mui/material";
 import AvatarCard from "./AvatarCard";
 
@@ -15,7 +15,7 @@ const ChatItem = ({
   handleDeleteChat,
 }) => {
   return (
-    <Link to={`/chat/${_id}`} onContextMenu={(e)=> handleDeleteChat(e,_id,groupChat)}>
+    <Link to={`/chat/${_id}`} onContextMenu={(e) => handleDeleteChat(e, _id, groupChat)}>
       <div
         style={{
           display: "flex",
@@ -27,7 +27,7 @@ const ChatItem = ({
           position: "relative",
         }}
       >
-        <AvatarCard avatar={avatar}/>
+        <AvatarCard avatar={avatar} />
         <Stack>
           <Typography>{name}</Typography>
           {newMessageAlert && (

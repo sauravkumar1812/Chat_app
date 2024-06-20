@@ -1,8 +1,6 @@
 
  export const samplechats = [{
-  avatar:[
-"https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"
-  ],
+  avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],
   name:"Saurav kumar",
   _id:"1",
   groupChat:false,
