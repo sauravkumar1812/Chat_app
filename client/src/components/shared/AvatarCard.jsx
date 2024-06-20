@@ -3,7 +3,7 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
-const AvatarCard = ({ avatar = [] }, max = 4) => {
+const AvatarCard = ({ avatar = [] , max = 4}) => {
   return (
     <Stack direction="row" spacing={0.5}>
       <AvatarGroup max={max}>
