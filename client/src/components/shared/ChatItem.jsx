@@ -14,7 +14,7 @@ const ChatItem = ({
   handleDeleteChatOpen,
 }) => {
   return (
-    <Link to={`/chat/${_id}`}>
+    <Link to={`/chat/${_id}`} onContextMenu={(e)=> handleDeleteChatOpen(e,_id,groupChat)}>
       <div
         style={{
           display: "flex",
@@ -51,4 +51,4 @@ const ChatItem = ({
   );
 };
 
-export default ChatItem;
+export default memo(ChatItem);
