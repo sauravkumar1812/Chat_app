@@ -1,6 +1,6 @@
-import React from "react";
-import { Link, Typography } from "../styles/styledComponents";
-import { Box, Stack } from "@mui/material";
+import React,{memo} from "react";
+import { Link} from "../styles/styledComponents";
+import { Box, Stack, Typography } from "@mui/material";
 
 const ChatItem = ({
   avatar = [],
@@ -8,7 +8,7 @@ const ChatItem = ({
   _id,
   groupChat = false,
   sameSender,
-  isOnlinne,
+  isOnline,
   newMessageAlert,
   index = 0,
   handleDeleteChatOpen,

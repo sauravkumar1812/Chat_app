@@ -29,7 +29,7 @@ const ChatList = ({
             isOnline={isOnline}
             avatar={avatar}
             name={name}
-            _id={id}
+            _id={_id}
             key={_id}
             groupChat={groupChat}
             sameSender={chatId === _id}
