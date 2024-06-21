@@ -22,6 +22,7 @@ const UserItem = ({ user, handler, hnadlerIsLoading }) => {
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            width:"100%"
           }}
         >
           {name}

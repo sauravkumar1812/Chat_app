@@ -45,7 +45,7 @@ console.log(id);
               user={user}
               key={user._id}
               handler={addFriendHandler}
-              hnadlerIsLoading={isLoadingSendFriendRequest}
+              handlerIsLoading={isLoadingSendFriendRequest}
             />
           ))}
         </List>
