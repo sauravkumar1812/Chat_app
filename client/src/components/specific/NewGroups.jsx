@@ -8,19 +8,21 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import {users} from "../../constants/sampleData"
+import {sampleUsers} from "../../constants/sampleData"
 const NewGroupDialog = () => {
+  const selectMemberHandler = () => {
+
+  }
   return (
     <Dialog open>
     <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
       <DialogTitle>New group</DialogTitle>
      <Stack>
-     {users.map((user) => (
+     {sampleUsers.map((user) => (
             <UserItem
               user={user}
               key={user._id}
-              handler={addFriendHandler}
-              handlerIsLoading={isLoadingSendFriendRequest}
+              handler={selectMemberHandler}
             />
           ))}
      </Stack>
