@@ -11,7 +11,13 @@ import {
 import { InputBox } from "../components/styles/styledComponents";
 import { orange } from "../constants/color";
 import FileMenu from "../components/dialogs/FileMenu";
+import { sampleMessage } from "../constants/sampleData";
+import MessageComponent from "../components/shared/MessageComponent";
 
+const user={
+  _id: "sdfsdfsdf",
+  name:"Saurav kumar"
+}
 
 const Chat = () => {
   const containerRef = useRef(null);
@@ -29,7 +35,13 @@ const Chat = () => {
           overflowX: "hidden",
           overflowY: "auto",
         }}
-      ></Stack>
+      >'
+      {
+        sampleMessage.map(i=>(
+          <MessageComponent message={i} user={user}/>
+        ))
+      }
+      </Stack>
       <form
         style={{
           height: "10%",

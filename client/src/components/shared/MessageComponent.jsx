@@ -1,7 +1,18 @@
 import React, { memo } from 'react'
 
 const MessageComponent = ({message,user}) => {
-  return <div>MessageComponent</div>
+    const {sender,content,attachments =[],createdAt}= message;
+    const sameSender = sender?._id === user?._id
+  return <div
+  style={{
+    alignSelf:sameSender?"flex-end":"flex-start",
+    backgroundColor:"white",
+    color:"black",
+    borderRadius:"5px",
+    padding:"0.5rem",
+    width:"fit-content"
+  }}
+  >MessageComponent</div>
 }
 
 export default memo(MessageComponent)
