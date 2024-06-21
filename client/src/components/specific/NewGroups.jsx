@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import { useInputValidation } from "6pp";
 const NewGroupDialog = () => {
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const [members, setmembers] = useState(sampleUsers);
+  const [members, setMembers] = useState(sampleUsers);
   const selectMemberHandler = (id) => {
+   
     setSelectedMembers((prev) =>
       prev.includes(id)
         ? prev.filter((currElement) => currElement !== id)
