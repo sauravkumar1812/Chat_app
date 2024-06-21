@@ -5,14 +5,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { sampleUsers } from "../../constants/sampleData";
 import UserItem from "../shared/UserItem";
 import Button from "@mui/material/Button";
 import { useInputValidation } from "6pp";
 const NewGroupDialog = () => {
+  const [] = useState([]);
   const selectMemberHandler = () => {};
   const groupName = useInputValidation("");
+  const submitHandler = () => {
+
+  }
   return (
     <Dialog open>
       <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
@@ -32,7 +36,7 @@ const NewGroupDialog = () => {
           <Button varaint="text" color="error">
             Decline
           </Button>
-          <Button varaint="contained">Create</Button>
+          <Button varaint="contained" onClick={submitHandler}>Create</Button>
         </Stack>
       </Stack>
     </Dialog>
