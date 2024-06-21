@@ -63,11 +63,11 @@ export const sampleMessage=[
           url: "https://www.w3schools.com/howto/img_avatar.png",
         },
       ],
-      content: "",
+      content: "hamko kya hi pata h bhai?",
       _id: "sfnsdjkfsdnfkdddjsbnd",
       sender: {
         _id: "sdfsdfsdf",
-        name: "Chaman  2",
+        name: "Chaman 2",
       },
       chat: "chatId",
       createdAt: "2024-02-12T10:41:30.630Z",

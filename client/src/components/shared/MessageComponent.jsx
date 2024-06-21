@@ -1,8 +1,12 @@
-import React, { memo } from 'react'
+import { Typography } from '@mui/material';
+import React, { memo } from 'react';
+import { lightblue } from '../../constants/color';
+import moment from 'moment';
 
 const MessageComponent = ({message,user}) => {
     const {sender,content,attachments =[],createdAt}= message;
-    const sameSender = sender?._id === user?._id
+    const sameSender = sender?._id === user?._id;
+    const timeAgo = moment(createdAt).fromNow();
   return <div
   style={{
     alignSelf:sameSender?"flex-end":"flex-start",
@@ -12,7 +16,11 @@ const MessageComponent = ({message,user}) => {
     padding:"0.5rem",
     width:"fit-content"
   }}
-  >MessageComponent</div>
+  >{!sameSender && <Typography color={lightblue} fontWeight={"600"} variant='caption'>{sender.name}</Typography>}
+   {content && <Typography>{content}</Typography>}
+
+   <Typography variant='caption' color={"text.secondary"}>{timeAgo}</Typography>
+  </div>
 }
 
 export default memo(MessageComponent)
