@@ -7,6 +7,7 @@ import {
   ListItem,
   Typography,
   Avatar,
+  TextField,
 } from "@mui/material";
 import {sampleUsers} from "../../constants/sampleData"
 const NewGroupDialog = () => {
@@ -17,6 +18,10 @@ const NewGroupDialog = () => {
     <Dialog open>
     <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
       <DialogTitle>New group</DialogTitle>
+      <TextField/>
+      <Typography>
+        Members
+      </Typography>
      <Stack>
      {sampleUsers.map((user) => (
             <UserItem
@@ -25,6 +30,10 @@ const NewGroupDialog = () => {
               handler={selectMemberHandler}
             />
           ))}
+     </Stack>
+     <Stack direction={"row"}>
+     <Button>Decline</Button>
+     <Button>Create</Button>
      </Stack>
     </Stack>
   </Dialog>
