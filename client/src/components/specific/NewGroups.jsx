@@ -1,3 +1,4 @@
+import { useInputValidation } from "6pp";
 import {
   Dialog,
   DialogTitle,
@@ -5,25 +6,24 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { sampleUsers } from "../../constants/sampleData";
 import UserItem from "../shared/UserItem";
-import Button from "@mui/material/Button";
-import { useInputValidation } from "6pp";
 const NewGroupDialog = () => {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [members, setMembers] = useState(sampleUsers);
   const selectMemberHandler = (id) => {
-   
     setSelectedMembers((prev) =>
       prev.includes(id)
         ? prev.filter((currElement) => currElement !== id)
         : [...prev, id]
     );
   };
-  console.log(selectedMembers);
+ 
   const groupName = useInputValidation("");
   const submitHandler = () => {};
+  const closeHandler = () => {};
   return (
     <Dialog open>
       <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
