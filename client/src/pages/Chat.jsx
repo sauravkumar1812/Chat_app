@@ -1,20 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import AppLayout from "../components/layout/AppLayout";
-import { Stack } from "@mui/material";
+import { Stack ,IconButton} from "@mui/material";
 import { grayColor } from "../constants/color";
 import { useRef } from "react";
-import { IconButton } from "@mui/material";
+
 import {
   AttachFile as AttachFileIcon,
-  Send as SendIcon,
+  Send as SendIcon
 } from "@mui/icons-material";
 import { InputBox } from "../components/styles/styledComponents";
-import { orange } from "@mui/material/colors";
+import { orange } from "../constants/color";
+import FileMenu from "../components/dialogs/FileMenu";
+
 
 const Chat = () => {
   const containerRef = useRef(null);
+
   return (
-    <>
+    <Fragment>
       <Stack
         ref={containerRef}
         boxSizing={"border-box"}
@@ -40,10 +43,16 @@ const Chat = () => {
           alignItems={"center"}
           position={"relative"}
         >
-          <IconButton>
+          <IconButton sx={{
+            position:"absolute",
+            left:"1.5rem",
+            rotate:"30deg"
+          }}
+         
+          >
             <AttachFileIcon />
           </IconButton>
-          <InputBox placeholder="Type your messages here....." />
+          <InputBox  placeholder="Type your messages here....." />
           <IconButton
             type="submit"
             sx={{
@@ -61,7 +70,9 @@ const Chat = () => {
           </IconButton>
         </Stack>
       </form>
-    </>
+      <FileMenu />
+
+    </Fragment>
   );
 };
 
