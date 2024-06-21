@@ -14,7 +14,7 @@ const NewGroupDialog = () => {
   return (
     <Dialog open>
       <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
-        <DialogTitle>New group</DialogTitle>
+        <DialogTitle textAlign={"center"} varaint="h4">New group</DialogTitle>
         <TextField />
         <Typography>Members</Typography>
         <Stack>
