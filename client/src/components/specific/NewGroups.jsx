@@ -8,6 +8,7 @@ import {
 import React from "react";
 import { sampleUsers } from "../../constants/sampleData";
 import UserItem from "../shared/UserItem";
+import Button from "@mui/material/Button";
 const NewGroupDialog = () => {
   const selectMemberHandler = () => {};
   return (
