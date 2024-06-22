@@ -1,7 +1,14 @@
-import { Grid } from "@mui/material";
+import { Grid, IconButton, Tooltip } from "@mui/material";
 import React from "react";
-
+import { KeyboardBackspace as KeyboardBackspaceIcon } from "@mui/icons-material";
 const Group = () => {
+  const IconsBtns = <>
+  <Tooltip title="back">
+   <IconButton>
+    <KeyboardBackspaceIcon  />
+   </IconButton >
+  </Tooltip>
+  </>
   return (
     <Grid container height={"100vh"}>
       <Grid
@@ -13,6 +20,7 @@ const Group = () => {
           },
         }}
         sm={4}
+        bgcolor={"bisque"}
       >
         Group list
       </Grid>
@@ -23,7 +31,7 @@ const Group = () => {
         position:"relative",
         padding:"1rem 3rem"
       }}>
-        Group Details
+       {IconsBtns}
       </Grid>
     </Grid>
   );
