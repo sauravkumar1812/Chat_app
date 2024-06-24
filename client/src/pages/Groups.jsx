@@ -1,18 +1,20 @@
 import { Box, Drawer, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import React, { memo, useState } from "react";
-import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon } from "@mui/icons-material";
 import { matblack } from "../constants/color";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/styledComponents";
 import AvatarCard from "../components/shared/AvatarCard";
 import { samplechats } from "../constants/sampleData";
 const Group = () => {
-  const chatId ="adjbdj"
+  const chatId =useSearchParams()[0].get("group");
   const [isMobileMenuOpen,setIsMobileMenuOpen] = useState(false)
   const  navigate = useNavigate()
+  const [isEdit,setIsEdit] =useState(false)
   const navigateBack =()=>{
    navigate("/")
   }
+  // console.log(chatId)
   const handleMobile=() =>{
     setIsMobileMenuOpen((prev)=>!prev);
   }
@@ -50,6 +52,16 @@ const Group = () => {
    </IconButton >
   </Tooltip>
   </>
+  const GroupName=<Stack>
+    {
+      isEdit?<></>:<>
+      <Typography variant="h4">
+        Group Name
+        </Typography>
+        <IconButton onClick={()=>setIsEdit(true)}><EditIcon/></IconButton>
+        </>
+    }
+  </Stack>
   return (
     <Grid container height={"100vh"}>
       <Grid
@@ -73,6 +85,9 @@ const Group = () => {
         padding:"1rem 3rem"
       }}>
        {IconsBtns}
+       {
+        GroupName
+       }
       </Grid>
       <Drawer sx={{
         display:{
