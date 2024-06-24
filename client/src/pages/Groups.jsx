@@ -1,6 +1,6 @@
-import { Box, Drawer, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Drawer, Grid, IconButton, Stack, TextField, Tooltip, Typography } from "@mui/material";
 import React, { memo, useState } from "react";
-import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon } from "@mui/icons-material";
+import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon,Done as DoneIocn } from "@mui/icons-material";
 import { matblack } from "../constants/color";
 import {  useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/styledComponents";
@@ -17,6 +17,10 @@ const Group = () => {
   // console.log(chatId)
   const handleMobile=() =>{
     setIsMobileMenuOpen((prev)=>!prev);
+  }
+  const updateGroupName=()=>{
+    setIsEdit(false);
+    // console.log("group name updated")
   }
   const handleMobileClose=()=>setIsMobileMenuOpen(false);
   const IconsBtns = <>
@@ -52,9 +56,14 @@ const Group = () => {
    </IconButton >
   </Tooltip>
   </>
-  const GroupName=<Stack>
+  const GroupName=<Stack direction={"row"} alignItems={"center"} justifyContent={"center"} spacing={"1rem"} padding={"3rem"}>
     {
-      isEdit?<></>:<>
+      isEdit?<>
+      <TextField/>
+      <IconButton onClick={updateGroupName}>
+        <DoneIocn/>
+      </IconButton>
+        </>:<>
       <Typography variant="h4">
         Group Name
         </Typography>
