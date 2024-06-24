@@ -1,5 +1,5 @@
 import { Box, Drawer, Grid, IconButton, Stack, TextField, Tooltip, Typography } from "@mui/material";
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon,Done as DoneIocn } from "@mui/icons-material";
 import { matblack } from "../constants/color";
 import {  useNavigate, useSearchParams } from "react-router-dom";
@@ -10,7 +10,9 @@ const Group = () => {
   const chatId =useSearchParams()[0].get("group");
   const [isMobileMenuOpen,setIsMobileMenuOpen] = useState(false)
   const  navigate = useNavigate()
-  const [isEdit,setIsEdit] =useState(false)
+  const [isEdit,setIsEdit] =useState(false);
+  const [groupName,setGroupName] = useState("");
+  const [groupNameUpdatedValue,setGroupNameUpdatedValue] = useState("")
   const navigateBack =()=>{
    navigate("/")
   }
@@ -20,8 +22,12 @@ const Group = () => {
   }
   const updateGroupName=()=>{
     setIsEdit(false);
-    // console.log("group name updated")
+    console.log(groupNameUpdatedValue)
   }
+  useEffect(()=>{
+    setGroupName("Group Name");
+    setGroupNameUpdatedValue("Group Name")
+  },[])
   const handleMobileClose=()=>setIsMobileMenuOpen(false);
   const IconsBtns = <>
 
@@ -59,13 +65,13 @@ const Group = () => {
   const GroupName=<Stack direction={"row"} alignItems={"center"} justifyContent={"center"} spacing={"1rem"} padding={"3rem"}>
     {
       isEdit?<>
-      <TextField/>
+      <TextField value={groupNameUpdatedValue} onChange={(e)=>setGroupNameUpdatedValue(e.target.value)}/>
       <IconButton onClick={updateGroupName}>
         <DoneIocn/>
       </IconButton>
         </>:<>
       <Typography variant="h4">
-        Group Name
+        {groupName}
         </Typography>
         <IconButton onClick={()=>setIsEdit(true)}><EditIcon/></IconButton>
         </>
@@ -95,7 +101,7 @@ const Group = () => {
       }}>
        {IconsBtns}
        {
-        GroupName
+          groupName && GroupName
        }
       </Grid>
       <Drawer sx={{
