@@ -1,18 +1,21 @@
 
- export const samplechats = [{
-  avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],
-  name:"Saurav kumar",
-  _id:"1",
-  groupChat:false,
-  members:["1","2"],
-},
-{
-  avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],
-      name:"Saurav singh",
-      _id:"2",
-      groupChat:false,
-      members:["1","2"],
-}]
+export const samplechats = [
+  {
+    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
+    name: "John Doe",
+    _id: "1",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+
+  {
+    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
+    name: "John Boi",
+    _id: "2",
+    groupChat: true,
+    members: ["1", "2"],
+  },
+];
 
 export  const sampleUsers=[{
   avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],

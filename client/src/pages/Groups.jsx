@@ -1,10 +1,13 @@
 import { Box, Drawer, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon } from "@mui/icons-material";
 import { matblack } from "../constants/color";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { Link } from "../components/styles/styledComponents";
+import AvatarCard from "../components/shared/AvatarCard";
+import { samplechats } from "../constants/sampleData";
 const Group = () => {
-  
+  const chatId ="adjbdj"
   const [isMobileMenuOpen,setIsMobileMenuOpen] = useState(false)
   const  navigate = useNavigate()
   const navigateBack =()=>{
@@ -60,7 +63,7 @@ const Group = () => {
         sm={4}
         bgcolor={"bisque"}
       >
-       <GroupList/>
+       <GroupList myGroups={samplechats} chatId={chatId}/>
       </Grid>
       <Grid item xs={12}sm={8} sx={{
         display:"flex",
@@ -77,16 +80,16 @@ const Group = () => {
           sm:"none"
         }
       }} open={isMobileMenuOpen} onClose={handleMobileClose}>
-       <GroupList w={"50vw"}/>
+       <GroupList w={"50vw"} myGroups={samplechats} chatId={chatId}/>
       </Drawer>
     </Grid>
   );
 };
 
 const GroupList =({w="100%",myGroups=[],chatId}) =>(
-  <Stack>
+  <Stack width={w}>
     {
-      myGroups.length > 0? myGroups.map((group)=>{}) :
+      myGroups.length > 0? myGroups.map((group)=><GroupListItem group={group} chatId ={chatId} key={group._id}/>) :
       (<Typography>
         No Groups
       </Typography>)
@@ -94,7 +97,17 @@ const GroupList =({w="100%",myGroups=[],chatId}) =>(
   </Stack>
 )
 
-const GroupListItem =({group})=>{
-  const {name,avatar,_id,chatId} = group;
-}
+const GroupListItem =memo(({group,chatId})=>{
+  const {name,avatar,_id} = group;
+  return <Link to={`?group=${_id}`} onClick={e=>{
+    if(chatId === _id) e.preventDefault()
+  }}>
+  <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
+    <AvatarCard avatar={avatar}/>
+    <Typography>
+      {name}
+    </Typography>
+    </Stack>
+    </Link>
+});
 export default Group;
