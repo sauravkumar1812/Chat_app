@@ -25,9 +25,14 @@ const Group = () => {
     console.log(groupNameUpdatedValue)
   }
   useEffect(()=>{
-    setGroupName("Group Name");
-    setGroupNameUpdatedValue("Group Name")
-  },[])
+    setGroupName(`Group Name${chatId}`);
+    setGroupNameUpdatedValue(`Group Name${chatId}`)
+    return ()=>{
+      setGroupName("")
+      setGroupNameUpdatedValue("");
+      setIsEdit(false)
+    }
+  },[chatId])
   const handleMobileClose=()=>setIsMobileMenuOpen(false);
   const IconsBtns = <>
 
