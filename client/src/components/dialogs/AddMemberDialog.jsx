@@ -14,10 +14,11 @@ const AddMemberDialog = ({addMember,isLoadingAddMember,chatId}) => {
     };
    
    const closeHandler=()=>{
-
+    setSelectedMembers([])
+         setMembers([]);
    }
     const addMemberSubmitHandler= () =>{
-
+           closeHandler()
     }
   return <Dialog open onClose={closeHandler}>
     <Stack p={"2rem"} width={"20rem"} spacing={"2rem"}>
@@ -26,7 +27,7 @@ const AddMemberDialog = ({addMember,isLoadingAddMember,chatId}) => {
     </DialogTitle>
    <Stack spacing={"1rem"}>
     {
-     sampleUsers.length> 0 ?( sampleUsers.map(i=>(
+     members.length> 0 ?( members.map(i=>(
         <UserItem key={i._id} user={i} handler={selectMemberHandler} isAdded={selectedMembers.includes(i._id)} />
         
      
