@@ -58,6 +58,14 @@ const Group = () => {
   const openAddMemberHandler = () => {
     console.log("ADD Members");
   };
+  
+  const deleteHandler =()=>{
+    console.log("Delete Handler")
+  }
+
+
+
+
   const ButtonGroup = (
     <Stack
       direction={{
@@ -220,6 +228,7 @@ const Group = () => {
           <ConfirmDeleteDialog
             open={confirmDeleteDialog}
             handleClose={closeConfirmDeletehandler}
+            deleteHandler={deleteHandler}
           />
         </Suspense>
       )}
