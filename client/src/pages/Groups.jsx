@@ -1,6 +1,6 @@
-import { Box, Drawer, Grid, IconButton, Stack, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Drawer, Grid, IconButton, Stack, TextField, Tooltip, Typography } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
-import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon,Done as DoneIocn } from "@mui/icons-material";
+import { KeyboardBackspace as KeyboardBackspaceIcon, Menu as MenuIcon,Edit as EditIcon,Done as DoneIocn, Delete  as DeleteIcon, Add as AddIcon} from "@mui/icons-material";
 import { matblack } from "../constants/color";
 import {  useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/styledComponents";
@@ -24,6 +24,26 @@ const Group = () => {
     setIsEdit(false);
     console.log(groupNameUpdatedValue)
   }
+  const confirmDeletehandler =() =>{
+   console.log("Delete Group")
+  }
+  const openAddMemberHandler=() => {
+    console.log("ADD Members")
+  }
+  const ButtonGroup=<Stack direction={{
+    sm:"row",
+    xs:"column-reverse"
+  }}
+  spacing={"1rem"}
+  p={{
+    sm:"1rem",
+    xs:"0",
+    md:"1rem 4rem",
+  }}>
+    <Button size="large" color="error" variant="outlined" startIcon={<DeleteIcon/>} onClick={confirmDeletehandler}>Delete Group</Button>
+   <Button size="large" variant="contained" startIcon={<AddIcon/>} onClick={openAddMemberHandler}>Add Members</Button>
+   
+  </Stack>
   useEffect(()=>{
     setGroupName(`Group Name${chatId}`);
     setGroupNameUpdatedValue(`Group Name${chatId}`)
@@ -106,7 +126,28 @@ const Group = () => {
       }}>
        {IconsBtns}
        {
-          groupName && GroupName
+          groupName && <>{GroupName}
+          <Typography>
+            Members
+          </Typography>
+          <Stack
+          maxWidth={"45rem"}
+          width={"100%"}
+          boxSizing={"border-box"}
+          padding={{
+            sm:"1rem",
+            xs:"0",
+            md:"1rem 4rem"
+          }}
+          spacing={"2rem"}
+          bgcolor={"bisque"}
+      height={"50vh"}
+      overflow={"auto"}          
+          >
+           
+          </Stack>
+          {ButtonGroup}
+          </>
        }
       </Grid>
       <Drawer sx={{
