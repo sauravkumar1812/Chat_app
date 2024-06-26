@@ -47,7 +47,7 @@ const NewGroupDialog = () => {
           ))}
         </Stack>
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <Button varaint="text" color="error">
+          <Button varaint="text" color="error" onClick={closeHandler}>
             Decline
           </Button>
           <Button varaint="contained" onClick={submitHandler}>

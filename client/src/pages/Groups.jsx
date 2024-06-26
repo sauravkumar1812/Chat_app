@@ -27,6 +27,9 @@ import { samplechats } from "../constants/sampleData";
 const ConfirmDeleteDialog = lazy(() =>
   import("../components/dialogs/ConfirmDeleteDialog")
 );
+const AddMemberDialog = lazy(() =>
+  import("../components/dialogs/AddMemberDialog")
+);
 const Group = () => {
   const chatId = useSearchParams()[0].get("group");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -62,7 +65,7 @@ const Group = () => {
   const deleteHandler =()=>{
     console.log("Delete Handler")
   }
-
+ const isAddMember = true;
 
 
 
@@ -223,6 +226,13 @@ const Group = () => {
           </>
         )}
       </Grid>
+
+{
+     isAddMember && <Suspense fallback={<Backdrop open/>}>
+     <AddMemberDialog/>
+     </Suspense>
+}
+
       {confirmDeleteDialog && (
         <Suspense fallback={<Backdrop open />}>
           <ConfirmDeleteDialog
