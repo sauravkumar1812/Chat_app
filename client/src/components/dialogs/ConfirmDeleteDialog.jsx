@@ -1,15 +1,28 @@
-import { Dialog } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button
+} from '@mui/material';
 
-const ConfirmDeleteDialog = ({open,handleClose,delteHandler}) => {
-  return <Dialog open={open} onClose={handleClose}>  
-    <DialogTitle>Confirm Delete</DialogTitle>
-    <DialogContent>
+const ConfirmDeleteDialog = ({ open, handleClose, deleteHandler }) => {
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Confirm Delete</DialogTitle>
+      <DialogContent>
         <DialogContentText>
-            Are You Sure Want To Delete This Group....??
+          Are you sure you want to delete this group?
         </DialogContentText>
-    </DialogContent>
-  </Dialog>
-}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={deleteHandler} color="error">Delete</Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
-export default ConfirmDeleteDialog
+export default ConfirmDeleteDialog;
