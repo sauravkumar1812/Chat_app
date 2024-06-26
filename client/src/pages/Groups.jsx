@@ -23,7 +23,8 @@ import { matblack } from "../constants/color";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/styledComponents";
 import AvatarCard from "../components/shared/AvatarCard";
-import { samplechats } from "../constants/sampleData";
+import { sampleUsers, samplechats } from "../constants/sampleData";
+import UserItem from "../components/shared/UserItem";
 const ConfirmDeleteDialog = lazy(() =>
   import("../components/dialogs/ConfirmDeleteDialog")
 );
@@ -218,10 +219,19 @@ const Group = () => {
                 md: "1rem 4rem",
               }}
               spacing={"2rem"}
-              bgcolor={"bisque"}
               height={"50vh"}
               overflow={"auto"}
-            ></Stack>
+            >
+              {
+                sampleUsers.map((i)=>(
+                  <UserItem user={i} isAdded styling={{
+                    boxShadow:"0 0 0.rem rgba(0,0,0,0.2)",
+                    padding:"1rem 2rem",
+                    borderRadius:"1rem"
+                  }}/>
+                ))
+              }
+            </Stack>
             {ButtonGroup}
           </>
         )}
