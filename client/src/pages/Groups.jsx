@@ -1,4 +1,5 @@
 import {
+  Backdrop,
   Box,
   Button,
   Drawer,
@@ -9,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { memo, useEffect, useState } from "react";
+import React, { Suspense, lazy, memo, useEffect, useState } from "react";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
   Menu as MenuIcon,
@@ -23,6 +24,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/styledComponents";
 import AvatarCard from "../components/shared/AvatarCard";
 import { samplechats } from "../constants/sampleData";
+const ConfirmDeleteDialog = lazy(() =>
+  import("../components/dialogs/ConfirmDeleteDialog")
+);
 const Group = () => {
   const chatId = useSearchParams()[0].get("group");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -211,11 +215,14 @@ const Group = () => {
           </>
         )}
       </Grid>
-      {
-        confirmDeleteDialog && <>
-        
-        </>
-      }
+      {confirmDeleteDialog && (
+        <Suspense fallback={<Backdrop open />}>
+          <ConfirmDeleteDialog
+            open={confirmDeleteDialog}
+            handleClose={closeConfirmDeletehandler}
+          />
+        </Suspense>
+      )}
       <Drawer
         sx={{
           display: {
