@@ -31,6 +31,9 @@ const ConfirmDeleteDialog = lazy(() =>
 const AddMemberDialog = lazy(() =>
   import("../components/dialogs/AddMemberDialog")
 );
+const removeMemberHandler=(id)=>{
+console.log("Remove Member",id)
+}
 const Group = () => {
   const chatId = useSearchParams()[0].get("group");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -224,11 +227,13 @@ const Group = () => {
             >
               {
                 sampleUsers.map((i)=>(
-                  <UserItem user={i} isAdded styling={{
-                    boxShadow:"0 0 0.rem rgba(0,0,0,0.2)",
+                  <UserItem user={i} isAdded
+                  key={i._id} styling={{
+                    boxShadow:"0 0 0.5rem rgba(0,0,0,0.2)",
                     padding:"1rem 2rem",
                     borderRadius:"1rem"
-                  }}/>
+                  }}
+                  handler={removeMemberHandler}/>
                 ))
               }
             </Stack>
