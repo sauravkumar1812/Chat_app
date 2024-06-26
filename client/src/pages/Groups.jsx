@@ -65,7 +65,7 @@ const Group = () => {
   const deleteHandler =()=>{
     console.log("Delete Handler")
   }
- const isAddMember = true;
+ const isAddMember = false;
 
 
 
