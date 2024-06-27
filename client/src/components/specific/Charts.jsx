@@ -13,6 +13,7 @@ import {
   plugins,
   scales,
 } from "chart.js";
+import { purple } from "../../constants/color";
 
 
 ChartJS.register(
@@ -42,6 +43,7 @@ const lineChartOptions = {
         display: false,
 
     },
+  },
     y: {
       beginAtZero: true,
      grid: {
@@ -49,12 +51,19 @@ const lineChartOptions = {
      },
     },
   },
-}
 };
 const LineChart = () => {
   const data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [1,2,3],
+    datasets: [{
+      label: "Sales",
+      data: [65, 59, 80, 81, 56, 55, 40],
+      fill: true,
+      borderColor:purple,
+      tension: 0.1,
+      backgroundColor: "rgba(75,12,192,0.2)",
+    },
+   ],
   };
   return <Line data={data} options={lineChartOptions}/>;
 
