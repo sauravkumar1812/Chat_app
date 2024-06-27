@@ -51,6 +51,7 @@ const Sidebar=({w = "100%"})=>{
          </Typography>
          <Stack spacing={"1rem"}>
           {adminTabs.map((tab)=>(
+           
             <Link key={tab.path} to={tab.path} sx={
                 location.pathname === tab.path &&  {
                     bgcolor:matblack,
@@ -64,24 +65,7 @@ const Sidebar=({w = "100%"})=>{
                     {
                         tab.icon
                     }
-                    <Typography>{tab.name}</Typography>
-                </Stack>
-            </Link>
-            ,
-            <Link key={tab.path} to={tab.path} sx={
-                location.pathname === tab.path &&  {
-                    bgcolor:matblack,
-                    color:"white",
-                    ":hover":{
-                        color:"white"
-                    }     
-                }
-            }>
-                <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
-                    {
-                        tab.icon
-                    }
-                    <Typography>{tab.name}</Typography>
+                    <Typography >{tab.name}</Typography>
                 </Stack>
             </Link>
            
@@ -89,7 +73,7 @@ const Sidebar=({w = "100%"})=>{
            <Link onClick={logoutHandler}>
                 <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
                     <ExitToAppIcon/>
-                    <Typography>Logout</Typography>
+                    <Typography >Logout</Typography>
                 </Stack>
             </Link>
          </Stack>
