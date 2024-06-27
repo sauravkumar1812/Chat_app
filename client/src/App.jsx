@@ -13,6 +13,11 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const AdminLogin = lazy(()=>import("./pages/admin/AdminLogin"))
 const Dashboard = lazy(()=>import("./pages/admin/Dashboard"))
+const ChatManagment = lazy(()=>import("./pages/admin/ChatManagment"))
+const UserManagment = lazy(()=>import("./pages/admin/UserManagment"))
+const MessageManagment = lazy(()=>import("./pages/admin/MessageManagment"))
+
+
 
 
 let user = true;
