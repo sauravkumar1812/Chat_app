@@ -1,8 +1,8 @@
+import { Close as CloseIcon, Dashboard as DashboardIcon, ExitToApp as ExitToAppIcon, Groups as GroupsIcon, ManageAccounts as ManageAccountsIcon, Menu as MenuIcon, Message as MessageIcon } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, Stack, Typography, styled } from '@mui/material'
 import React, { useState } from 'react'
+import { Link as LinkComponent, Navigate, useLocation } from 'react-router-dom'
 import { grayColor, matblack } from '../../constants/color'
-import { Close as CloseIcon, Dashboard as DashboardIcon, ExitToApp as ExitToAppIcon, Groups as GroupsIcon, ManageAccounts as ManageAccountsIcon, Menu as MenuIcon, Message as MessageIcon  } from '@mui/icons-material'
-import {  useLocation , Link as LinkComponent} from 'react-router-dom'
 
 
  const Link = styled(LinkComponent)`
@@ -38,13 +38,14 @@ const adminTabs = [
     },
   ];
   
-
+const isAdmin = true;
 const Sidebar=({w = "100%"})=>{
 
     const location = useLocation();
     const logoutHandler = ( )=>{
         console.log("Log out")
     }
+    if(!isAdmin)return <Navigate to={"/login"}/>
     return( <Stack width={w} direction={"column"} padding={"3rem"} spacing={"3rem"}>
          <Typography variant='h5' textTransform={"uppercase"}>
             Chaatu
