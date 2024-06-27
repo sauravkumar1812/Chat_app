@@ -1,30 +1,66 @@
-import React from 'react'
-import  {Line,Doughnut} from 'react-chartjs-2'
- import { Chart as ChartJS } from 'chart.js'
+import React from "react";
+import { Line, Doughnut } from "react-chartjs-2";
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Tooltip,
+  Filler,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Legend,
+  plugins,
+  scales,
+} from "chart.js";
 
 
-ChartJS.register();
+ChartJS.register(
+  CategoryScale,
+  Tooltip,
+  Filler,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Legend
+);
+
+const lineChartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display:false,
+    },  
+    title: {
+      display: false,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+
+    },
+    y: {
+      beginAtZero: true,
+     grid: {
+       display: false,
+     },
+    },
+  },
+}
+};
 const LineChart = () => {
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            backgroundColor: 'rgba(75,192,192,0.2)',
-            borderColor: 'rgba(75,192,192,1)',
-        },
-    ],
-};
-  return (
-   <Line data={{data}}/>
-  )
-}
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [1,2,3],
+  };
+  return <Line data={data} options={lineChartOptions}/>;
 
-const DoughnutChart =() => {
-    return (
-        <div>DoughnutChart</div>
-    )
-}
-export  {LineChart,DoughnutChart}
+};
+
+const DoughnutChart = () => {
+  return <div>DoughnutChart</div>;
+};
+export { LineChart, DoughnutChart };
