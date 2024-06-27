@@ -22,11 +22,11 @@ const Dashboard = () => {
   const Appbar = (
     <Paper
       elevation={3}
-      sx={{ padding: "1.5rem", margin: "2rem 0", borderRadius: "1rem" }}
+      sx={{ padding: "2rem", margin: "2rem 0", borderRadius: "1rem" }}
     >
       <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
         <AdminPanelSettingsIcon sx={{ fontSize: "3rem" }} />
-        <SearchField placeholder="search" />
+        <SearchField placeholder="search...." />
         <CurveButton>Search</CurveButton>
         <Box flexGrow={1} />
         <Typography
@@ -48,8 +48,8 @@ const Dashboard = () => {
     xs:"column",
     sm:"row",
   }} 
-  spacing={"2rem"}
-  justifyContent={"space-between"}
+  spacing="2rem"
+  justifyContent="space-between"
   alignItems={"center"}
   margin={"2rem 0"}
   ><Widget title={"Users"} value={34} Icon={<PersonIcon/>}/>
@@ -61,7 +61,16 @@ const Dashboard = () => {
       <Container component={"main"}>
         {Appbar}
 
-        <Stack direction={"row"} spacing={"2rem"} flexWrap={"wrap"}>
+        <Stack  direction={{
+              xs: "column",
+              sm: "row",
+            }}flexWrap={"wrap"}
+            justifyContent={"center"}
+            alignItems={{
+              xs: "center",
+              lg: "stretch",
+            }}
+            sx={{ gap: "2rem" }}>
           <Paper
             elevation={3}
             sx={{
