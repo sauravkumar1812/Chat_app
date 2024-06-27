@@ -13,8 +13,9 @@ import {
   plugins,
   scales,
 } from "chart.js";
-import { orange, purple, purpleLight } from "../../constants/color";
+import { orange, orangeLight, purple, purpleLight } from "../../constants/color";
 import { getLast7Days } from "../../lib/features";
+import zIndex from "@mui/material/styles/zIndex";
 
 
 ChartJS.register(
@@ -91,10 +92,11 @@ const DoughnutChart = ({value=[],labels=[]}) => {
       data: value,
       fill: true,
       borderColor:[purple,orange],
-      backgroundColor: [purpleLight,orange],
+      backgroundColor: [purpleLight,orangeLight],
+      hoverBackgroundColor:[purple,orange],
       offset:15
   }]
 };
-  return <Doughnut data={data} options={doughnutOptions}/>;
+  return <Doughnut style={{zIndex:10}} data={data} options={doughnutOptions}/>;
 };
 export { LineChart, DoughnutChart };
