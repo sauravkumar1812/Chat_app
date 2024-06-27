@@ -13,7 +13,8 @@ import {
   plugins,
   scales,
 } from "chart.js";
-import { purple } from "../../constants/color";
+import { orange, purple, purpleLight } from "../../constants/color";
+import { getLast7Days } from "../../lib/features";
 
 
 ChartJS.register(
@@ -52,24 +53,48 @@ const lineChartOptions = {
     },
   },
 };
-const LineChart = () => {
+const labels = getLast7Days();
+const LineChart = ({value=[]}) => {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: labels,
     datasets: [{
       label: "Sales",
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: value,
       fill: true,
       borderColor:purple,
       tension: 0.1,
-      backgroundColor: "rgba(75,12,192,0.2)",
-    },
-   ],
-  };
+      backgroundColor: purpleLight,
+  }]
+};
   return <Line data={data} options={lineChartOptions}/>;
 
 };
 
-const DoughnutChart = () => {
-  return <div>DoughnutChart</div>;
+
+const doughnutOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    title: {
+      display: false,
+    },
+  },
+  cutout:120,
+};
+const DoughnutChart = ({value=[],labels=[]}) => {
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: "Total Chats vs Group Chats",
+      data: value,
+      fill: true,
+      borderColor:[purple,orange],
+      backgroundColor: [purpleLight,orange],
+      offset:15
+  }]
+};
+  return <Doughnut data={data} options={doughnutOptions}/>;
 };
 export { LineChart, DoughnutChart };
