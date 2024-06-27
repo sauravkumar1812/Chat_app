@@ -1,9 +1,12 @@
 import React from 'react'
 import  {Line,Doughnut} from 'react-chartjs-2'
+ import { Chart as ChartJS } from 'chart.js'
 
+
+ChartJS.register();
 const LineChart = () => {
   return (
-    <div>charts</div>
+   <Line data={{}}/>
   )
 }
 
