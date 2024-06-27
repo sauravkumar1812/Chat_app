@@ -16,6 +16,7 @@ import {
   SearchField,
 } from "../../components/styles/styledComponents";
 import { matblack } from "../../constants/color";
+import { DoughnutChart, LineChart } from "../../components/specific/Charts";
 
 const Dashboard = () => {
   const Appbar = (
@@ -71,7 +72,7 @@ const Dashboard = () => {
             }}
           >
             <Typography margin={"2rem 0"} variant="h4" >Last Messages</Typography>
-            {"chat"}
+            <LineChart/>
           </Paper>
           <Paper elevation={3}
           sx={{
@@ -86,7 +87,7 @@ const Dashboard = () => {
             maxWidth:"25rem"
           }}
           >
-        {"Dougnut Chart"}
+        <DoughnutChart/>
         <Stack 
         position={"absolute"}
         direction={"row"}
