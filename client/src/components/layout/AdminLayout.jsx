@@ -38,7 +38,7 @@ const adminTabs = [
     },
   ];
   
-const isAdmin = true;
+const isAdmin = false;
 const Sidebar=({w = "100%"})=>{
 
     const location = useLocation();
