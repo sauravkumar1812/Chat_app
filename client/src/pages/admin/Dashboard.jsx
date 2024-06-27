@@ -39,7 +39,7 @@ const Dashboard = () => {
     </Paper>
   );
 
-  const Widgets = <>saurav singh</>;
+  const Widgets = <Stack></Stack>;
   return (
     <AdminLayout>
       <Container component={"main"}>
