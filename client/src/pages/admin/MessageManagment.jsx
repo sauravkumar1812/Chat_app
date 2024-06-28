@@ -91,7 +91,7 @@ const MessageManagment = () => {
 
   return (
     <AdminLayout>
-        <Table heading={"All Messages"} columns={columns} rows={rows}/>
+        <Table heading={"All Messages"} columns={columns} rows={rows} rowHeight={200}/>
     </AdminLayout>
   )
 }

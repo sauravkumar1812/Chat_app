@@ -14,14 +14,15 @@ export const VisualyHiddenInput = styled ("input") ({
     width:1,
 })
 
-export const Link= styled(LinkComponent)`
-   text-decoration:none,
-   color:black,
-   padding:1rem;
-   &:hover{
-   background-color:#fofofo;
-   }
+export const Link = styled(LinkComponent)`
+text-decoration: none;
+color: black;
+padding: 1rem;
+&:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 `;
+
 
 
 export const InputBox= styled("input")`
