@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 import AdminLayout from '../../components/layout/AdminLayout'
+import Table from '../../components/shared/Table'
 
 const columns = [{
   field: 'id',
@@ -55,9 +56,11 @@ const columns = [{
 }
 ]
 const MessageManagment = () => {
+  const [rows, setRows] = useState([]);
+
   return (
     <AdminLayout>
-        <div>MessageManagment</div>
+        <Table heading={"All Messages"} columns={columns} rows={rows}/>
     </AdminLayout>
   )
 }

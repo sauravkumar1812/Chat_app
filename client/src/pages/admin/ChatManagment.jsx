@@ -1,10 +1,10 @@
+import { Avatar, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
+import AvatarCard from "../../components/shared/AvatarCard";
 import Table from "../../components/shared/Table";
-import { Avatar, Stack } from "@mui/material";
 import { dashboardData } from "../../constants/sampleData";
 import { transformImage } from "../../lib/features";
-import AvatarCard from "../../components/shared/AvatarCard";
 const columns = [
   {
     field: "id",
@@ -75,6 +75,11 @@ const ChatManagment = () => {
         id: i._id,
         avatar: transformImage(i.avatar, 50),
         members: i.members.map((j) => j.avatar),
+        creator: {
+          name: i.creator.name,
+          avatar: i.creator.avatar,
+        },
+        
       }))
     );
   }, []);
