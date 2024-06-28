@@ -1,11 +1,11 @@
 import React,{useEffect, useState} from 'react'
 import AdminLayout from '../../components/layout/AdminLayout'
 import Table from '../../components/shared/Table'
-import { transformImage } from '../../lib/features'
+import { fileFormat, transformImage } from '../../lib/features'
 import moment from 'moment'
-import { Avatar, Stack } from '@mui/material'
+import { Avatar, Box, Stack } from '@mui/material'
 import { dashboardData } from '../../constants/sampleData'
-
+import RenderAttachment from '../../components/shared/RenderAttachment'
 const columns = [{
   field: 'id',
   headerName: 'ID',
@@ -17,7 +17,23 @@ const columns = [{
   headerName: 'Attachments',
   headerClassName: 'table-header',
   width: 200,
-  renderCell: (params) =>  <Avatar s alt={params.row.name}  src={params.row.avatar}   style={{ width: 50, height: 50, borderRadius: '50%' }} />
+  renderCell: (params) =>  {
+
+    const {attachments} = params.row;
+  return attachments?.length > 0 ? attachments.map(i=>{
+        const url = i.url;
+        const file = fileFormat(url);
+        return (
+          <Box>
+            <a href={url} download target="_blank"  style={{
+              color:"black"
+            }}>
+              {RenderAttachment(file,url)}
+              </a>
+          </Box>
+        )
+  }):"No Attachments"
+  }
   
 },
 {
@@ -29,15 +45,16 @@ const columns = [{
 },
 {
   field: 'sender',
-  headerName: 'Send By',
+  headerName: 'Sent By',
   headerClassName: 'table-header',
   width: 200,
-  renderCell: (params) => <Stack>
+  renderCell: (params) => (
+  <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
      <Avatar  alt={params.row.sender.name}  src={params.row.sender.avatar}  />
      <span>{params.row.sender.name}</span>
-  </Stack>
-  
+  </Stack>)
 },
+
 {
   field: 'chat',
   headerName: 'Chat',

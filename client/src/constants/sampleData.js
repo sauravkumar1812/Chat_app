@@ -161,7 +161,7 @@ export const dashboardData = {
       _id: "sfnsdjkfsdnfkjsbnd",
       sender: {
         avatar: "https://www.w3schools.com/howto/img_avatar.png",
-        name: "Chaman ",
+        name:"chaman"
       },
 
       chat: "chatId",
