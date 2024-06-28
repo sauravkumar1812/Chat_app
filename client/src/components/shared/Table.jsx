@@ -1,8 +1,8 @@
 import { Container, Paper, Typography } from '@mui/material'
 import React from 'react'
-import Datagrid from "@mui/x-data-grid"
+import {DataGrid} from "@mui/x-data-grid"
 import { matblack } from '../../constants/color'
-const Table = ({rows,column,heading,rowHeight = 52}) => {
+const Table = ({rows,columns,heading,rowHeight = 52}) => {
   return (<Container sx={{
     height:"100vh",
   }}>
@@ -29,9 +29,9 @@ const Table = ({rows,column,heading,rowHeight = 52}) => {
     }}
     
     >{heading}</Typography>
-    <Datagrid
+    <DataGrid
       rows={rows}
-      columns={column}
+      columns={columns}
       rowHeight={rowHeight}
       style={{ height: "80%"}}
 

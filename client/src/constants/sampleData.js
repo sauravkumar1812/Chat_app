@@ -82,3 +82,23 @@ export const sampleMessage=[
     },
   
 ]
+
+
+export const dashboardData = {
+  users:[{
+    avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],
+    name:"Saurav kumar",
+    _id:"1",
+    username:"saurav",
+    friends:20,
+    groups:5
+  },
+  {
+    avatar:["https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"],
+        name:"Saurav singh",
+        _id:"2",
+        username:"Shaurya",
+    friends:50,
+    groups:12
+  }],
+}
