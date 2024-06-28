@@ -132,5 +132,40 @@ export const dashboardData = {
         avatar: "https://www.w3schools.com/howto/img_avatar.png",
       },
     },
+  ],
+  messages:[
+    {
+      attachments: [
+        {
+          public_id: "asdsad 2",
+          url: "https://www.w3schools.com/howto/img_avatar.png",
+        },
+      ],
+      content: "kiska ka Message hai",
+      _id: "sfnsdjkfsdnfkjsbnd",
+      sender: {
+        _id: "ssdfsdfsdf",
+        name: "Chaman ",
+      },
+      chat: "chatId",
+      createdAt: "2024-02-12T10:41:30.630Z",
+    },
+  
+    {
+      attachments: [
+        {
+          public_id: "asdsad 2",
+          url: "https://www.w3schools.com/howto/img_avatar.png",
+        },
+      ],
+      content: "hamko kya hi pata h bhai?",
+      _id: "sfnsdjkfsdnfkdbvjdddjsbnd",
+      sender: {
+        _id: "sdfsdfsdf",
+        name: "Chaman 2",
+      },
+      chat: "chatId",
+      createdAt: "2024-02-12T10:41:30.630Z",
+    },
   ]
 }
