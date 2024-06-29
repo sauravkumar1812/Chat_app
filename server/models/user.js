@@ -1,8 +1,8 @@
-import { url } from "inspector";
-import { model,models,Schema } from "mongoose";
 
+import mongoose ,{ model,Schema} from "mongoose";
+import {hash} from "bcrypt";
 
-const Schema = new Schema({
+const schema = new Schema({
     name:{
         type:String,
         required:true
@@ -29,5 +29,11 @@ const Schema = new Schema({
     }
 },{timestamps:true});
 
-
-export const User =models.User || model("User", Schema);
+schema.pre("save", async function(next){
+    if(!this.isModified("password")){
+        next();
+    }
+    this.password = await hash(this.password,10);
+    next();
+});
+export const User = mongoose.models.User || model("User", schema);

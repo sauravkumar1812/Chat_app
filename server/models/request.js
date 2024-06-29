@@ -1,6 +1,6 @@
 import { url } from "inspector";
-import { model,models,Schema } from "mongoose";
 
+import mongoose ,{ model,Schema } from "mongoose";
 
 const Schema = new Schema({
     status: {
@@ -22,4 +22,4 @@ const Schema = new Schema({
 },{timestamps:true});
 
 
-export const Request =models.Request || model("Request", Schema);
+export const Request =mongoose.models.Request || model("Request", Schema);

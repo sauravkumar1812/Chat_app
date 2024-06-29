@@ -1,6 +1,6 @@
 import { url } from "inspector";
-import { model, models, Schema, Types } from "mongoose";
 
+import mongoose ,{ model,Schema,Types } from "mongoose";
 const Schema = new Schema(
   {
     sender: {
@@ -30,4 +30,4 @@ const Schema = new Schema(
   { timestamps: true }
 );
 
-export const Message = models.Message || model("Message", Schema);
+export const Message = mongoose.models.Message || model("Message", Schema);
