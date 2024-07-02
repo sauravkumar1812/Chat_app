@@ -5,6 +5,7 @@ import { sendToken } from "../utils/features.js";
 // Create a new user and store in data base and save in cookies
 const newUser = async (req, res) => {
   const { name, username, password, bio } = req.body;
+  console.log(req.body);
  
   const avatar = {
     public_id: "saurav_ka_photo",
@@ -24,8 +25,7 @@ const login =async (req, res) => {
   if(!isMatch){
     return res.status(401).json({message:"Invalid credentials"})
   }
-  sendToken(res, user, 201, `Welcome Back , ${user.name}` );
+  sendToken(res, user, 201,` Welcome Back , ${user.name}` );
 };
 
 export { login, newUser };
-

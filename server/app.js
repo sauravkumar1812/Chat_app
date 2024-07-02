@@ -9,7 +9,6 @@ const app = express();
 
 app.use(express.json());
 
-
 app.use(cookieParser());
 dotenv.config({path:"./.env"});
 
@@ -29,4 +28,4 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-    } ) ;
+    } ) ;

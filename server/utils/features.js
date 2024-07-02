@@ -47,8 +47,6 @@ const connectDB = (uri) => {
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-  // Debugging output to ensure token creation
-//   console.log("Generated token:", token);
 
   return res
     .status(code)
