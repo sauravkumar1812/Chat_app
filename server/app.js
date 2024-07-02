@@ -1,6 +1,6 @@
 import express from 'express';
 import userRoute from './routes/user.js';
-import connectDB from './utils/features.js';
+import {connectDB} from './utils/features.js';
 import dotenv from 'dotenv';
 
 
