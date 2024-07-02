@@ -5,6 +5,7 @@ import { sendToken } from "../utils/features.js";
 // Create a new user and store in data base and save in cookies
 const newUser = async (req, res) => {
   const { name, username, password, bio } = req.body;
+  console.log(req.body);
  
   const avatar = {
     public_id: "saurav_ka_photo",
