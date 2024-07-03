@@ -3,6 +3,7 @@ import userRoute from './routes/user.js';
 import {connectDB} from './utils/features.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import { errorMiddleware } from './middlewares/error.js';
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
     
 })
 
+app.use (errorMiddleware);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     } ) ;
