@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import userRoute from "./routes/user.js";
 import chatRoute from './routes/chat.js';
+import { createUser } from "./seeders/user.js";
 
 const app = express();
 
@@ -18,6 +19,8 @@ const mongoURI = process.env.MONGO_URI;
 const port = process.env.PORT || 3000;
 connectDB(mongoURI);
 
+
+createUser(10);
 app.use("/user", userRoute);
 app.use("/chat", chatRoute); 
 
