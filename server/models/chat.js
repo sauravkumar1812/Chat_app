@@ -2,7 +2,7 @@ import { url } from "inspector";
 
 import mongoose ,{ model,Schema,Types } from "mongoose";
 
-const Schema = new Schema({
+const chatSchema = new Schema({
     name:{
         type:String,
         required:true
@@ -34,4 +34,4 @@ const Schema = new Schema({
 },{timestamps:true});
 
 
-export const Chat =mongoose.models.Chat || model("Chat", Schema);
+export const Chat =mongoose.models.Chat || model("Chat", chatSchema);
