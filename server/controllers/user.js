@@ -1,6 +1,6 @@
 import { compare } from "bcrypt";
 import { User } from "../models/user.js";
-import { sendToken } from "../utils/features.js";
+import { cookieOptions, sendToken } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { TryCatch } from "../middlewares/error.js";
 
@@ -19,8 +19,8 @@ const newUser = async (req, res) => {
 };
 
 // Login user and save cookies use tryCatch as a middleware
-const login = TryCatch(async (req, res) => {
-  async (req, res, next) => {
+const login = async (req, res) => 
+  {
     const { username, password } = req.body;
 
     // Ensure we await the user query
@@ -42,7 +42,7 @@ const login = TryCatch(async (req, res) => {
     // If passwords match, send token
     sendToken(res, user, 200, `Welcome back, ${user.name}`);
   };
-});
+
 const getMyProfile = TryCatch(async (req, res) => {
   const user = await User.findById(req.user);
     if(!user){
@@ -53,4 +53,24 @@ const getMyProfile = TryCatch(async (req, res) => {
     user,
   });
 });
-export { login, newUser, getMyProfile };
+
+const logout = TryCatch(async (req, res) => {
+   
+    res.status(200).cookie("Chat-app-token","",{...cookieOptions,maxAge:0}).json({
+      success: true,
+      message:"Logged out successfully",
+    });
+  });
+  
+  const searchUser = TryCatch(async (req, res) => {
+   
+    const {name} = req.query;
+   
+
+
+    res.status(200).json({
+      success: true,
+      message:name,
+    });
+  });
+export { login, newUser, getMyProfile,logout,searchUser };
