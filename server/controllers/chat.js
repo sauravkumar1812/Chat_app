@@ -3,7 +3,8 @@ import { ErrorHandler } from "../utils/utility.js";
 import { Chat } from "../models/chat.js";
 import { emitEvent } from "../utils/features.js";
 import { ALERT } from "../constants/events.js";
-// import { emit } from "process";
+import { REFETCH_CHATS } from "../constants/events.js";
+
 const newGroupChat = TryCatch(async (req, res, next) => {
   const { name, members } = req.body;
 

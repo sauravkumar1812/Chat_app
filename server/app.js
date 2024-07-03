@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000;
 connectDB(mongoURI);
 
 
-createUser(10);
+// createUser(10);
 app.use("/user", userRoute);
 app.use("/chat", chatRoute); 
 
