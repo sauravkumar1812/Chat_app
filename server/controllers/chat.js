@@ -20,13 +20,25 @@ const newGroupChat = TryCatch(async (req, res, next) => {
     creator: req.user,
     members: allMembers,
   });
-  emitEvent(req,ALERT,allMembers,`welcome to ${name} group chat`)
-  emitEvent(req,REFETCH_CHATS,members)
+  emitEvent(req, ALERT, allMembers, `welcome to ${name} group chat`);
+  emitEvent(req, REFETCH_CHATS, members);
 
   return res.status(201).json({
     success: true,
-    message: "Group chat created successfully",
+    message: "Group  created successfully",
   });
 });
 
-export { newGroupChat };
+const getMyChats = TryCatch(async (req, res, next) => {
+  const chats = await Chat.find({ members: req.user }).populate(
+    "members",
+    "name username avatar"
+  );
+
+  return res.status(201).json({
+    success: true,
+    message: "Group  created successfully",
+  });
+});
+
+export { newGroupChat, getMyChats };
