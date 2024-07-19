@@ -1,13 +1,12 @@
+import { ALERT, REFETCH_CHATS } from "../constants/events.js";
 import { TryCatch } from "../middlewares/error.js";
-import { ErrorHandler } from "../utils/utility.js";
-import { Chat } from "../models/chat.js";
+import {Chat} from "../models/Chat.js";
 import { emitEvent } from "../utils/features.js";
-import { ALERT } from "../constants/events.js";
-import { REFETCH_CHATS } from "../constants/events.js";
+import { ErrorHandler } from "../utils/utility.js";
 
 const newGroupChat = TryCatch(async (req, res, next) => {
   const { name, members } = req.body;
-
+  console.log(name,members);
   if (members.length < 2) {
     return next(new ErrorHandler("Members must be more than 2", 400));
   }
@@ -32,13 +31,14 @@ const newGroupChat = TryCatch(async (req, res, next) => {
 const getMyChats = TryCatch(async (req, res, next) => {
   const chats = await Chat.find({ members: req.user }).populate(
     "members",
-    "name username avatar"
+    "name  avatar"
   );
 
-  return res.status(201).json({
+  return res.status(200).json({
     success: true,
-    message: "Group  created successfully",
+    chats,
   });
 });
 
-export { newGroupChat, getMyChats };
+export { getMyChats, newGroupChat };
+

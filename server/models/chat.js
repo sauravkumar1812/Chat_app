@@ -1,8 +1,6 @@
-import { url } from "inspector";
-
 import mongoose ,{ model,Schema,Types } from "mongoose";
 
-const chatSchema = new Schema({
+const schema = new Schema({
     name:{
         type:String,
         required:true
@@ -21,17 +19,8 @@ const chatSchema = new Schema({
          ref:"User"
      }
  ],
-    // avatar:{
-    //     public_id:{
-    //         type:String,
-    //         required:true
-    //     },
-    //     url:{   
-    //         type:String,
-    //         required:true
-    //     }
-    // }
+   
 },{timestamps:true});
 
 
-export const Chat =mongoose.models.Chat || model("Chat", chatSchema);
+export const Chat =mongoose.models.Chat || model("Chat", schema);
