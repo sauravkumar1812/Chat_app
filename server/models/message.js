@@ -1,7 +1,7 @@
-import { url } from "inspector";
+
 
 import mongoose ,{ model,Schema,Types } from "mongoose";
-const Schema = new Schema(
+const schema = new Schema(
   {
     sender: {
       type: Types.ObjectId,
@@ -30,4 +30,4 @@ const Schema = new Schema(
   { timestamps: true }
 );
 
-export const Message = mongoose.models.Message || model("Message", Schema);
+export const Message = mongoose.models.Message || model("Message", schema);
