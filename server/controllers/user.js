@@ -43,6 +43,7 @@ const login = async (req, res) =>
     sendToken(res, user, 200, `Welcome back, ${user.name}`);
   };
 
+  // Get the profile of the logged in user
 const getMyProfile = TryCatch(async (req, res) => {
   const user = await User.findById(req.user);
     if(!user){
@@ -54,6 +55,7 @@ const getMyProfile = TryCatch(async (req, res) => {
   });
 });
 
+// Logout user and clear cookies
 const logout = TryCatch(async (req, res) => {
    
     res.status(200).cookie("Chat-app-token","",{...cookieOptions,maxAge:0}).json({
