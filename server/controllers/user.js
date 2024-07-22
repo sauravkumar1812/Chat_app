@@ -1,5 +1,5 @@
 import { compare } from "bcrypt";
-import { User } from "../models/user.js";
+import { User } from "../models/User.js";
 import { cookieOptions, sendToken } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { TryCatch } from "../middlewares/error.js";
