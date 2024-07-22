@@ -361,12 +361,13 @@ const deleteChat = TryCatch(async (req, res, next) => {
   });
 });
 
+// Get Messages
 const getMessages = TryCatch(async (req, res, next) => {
   const chatId = req.params.id;
   const { page = 1 } = req.query;
   const limit = 20;
 
-  const [messages, totaMessagesCount] = await Promise.all([
+  const [messages, totalMessagesCount] = await Promise.all([
     Message.find({ chat: chatId })
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
@@ -376,11 +377,11 @@ const getMessages = TryCatch(async (req, res, next) => {
     Message.countDocuments({ chat: chatId }),
   ]);
 
-  const totaLPages = Math.ceil(totalMessagesCount / limit);
+  const totalPages = Math.ceil(totalMessagesCount / limit);
   return res.status(200).json({
     sucess: true,
     messages: messages.reverse(),
-    totaLPages,
+    totalPages,
   });
 });
 
