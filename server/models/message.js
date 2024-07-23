@@ -10,7 +10,7 @@ const schema = new Schema(
     },
     chat: {
       type: Types.ObjectId,
-      ref: "Chat",
+      ref: "User",
       required: true,
     },
     content: {
