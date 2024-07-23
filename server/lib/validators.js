@@ -77,7 +77,17 @@ const renameGroupValidator = () => [
     body("name", "Please Enter New Name").notEmpty(),
 ]
 
-
+// sendFreindRequest Validator
+const sendFreindRequestValidator = () => [
+  
+  body("userId", "Please Enter UserId").notEmpty(),
+]
+// acceptFreindRequest Validator
+const acceptFreindRequestValidator = () => [
+  
+  body("requestId", "Please Enter RequestId").notEmpty(),
+  body("accept", ).notEmpty().withMessage("Please Add Accept").isBoolean().withMessage("Accept must be a boolean"),
+]
 export {
   addNewMemberValidator,
   getMessagesValidator,
@@ -88,5 +98,7 @@ export {
   removeMemberValidator,
   sendAttachmentValidator,
   validateHandler,
-  renameGroupValidator
+  renameGroupValidator,
+  sendFreindRequestValidator,
+  acceptFreindRequestValidator
 };

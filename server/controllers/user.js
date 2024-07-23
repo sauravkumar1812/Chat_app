@@ -1,12 +1,14 @@
 import { compare } from "bcrypt";
-import { User } from "../models/User.js";
-import { Chat } from "../models/Chat.js";
-import { cookieOptions, sendToken } from "../utils/features.js";
-import { ErrorHandler } from "../utils/utility.js";
+import { NEW_REQUEST, REFETCH_CHATS } from "../constants/events.js";
 import { TryCatch } from "../middlewares/error.js";
+import { Chat } from "../models/Chat.js";
+import { Request } from "../models/Request.js";
+import { User } from "../models/User.js";
+import { cookieOptions, emitEvent, sendToken } from "../utils/features.js";
+import { ErrorHandler } from "../utils/utility.js";
 
 // Create a new user and store in database and save in cookies
-const newUser = async (req, res) => {
+const newUser = async (req, res,next) => {
   const { name, username, password, bio } = req.body;
   console.log(req.body);
 
@@ -20,7 +22,7 @@ const newUser = async (req, res) => {
 };
 
 // Login user and save cookies use tryCatch as a middleware
-const login = async (req, res) => {
+const login = async (req, res,next) => {
   const { username, password } = req.body;
 
   // Ensure we await the user query
@@ -44,7 +46,7 @@ const login = async (req, res) => {
 };
 
 // Get the profile of the logged in user
-const getMyProfile = TryCatch(async (req, res) => {
+const getMyProfile = TryCatch(async (req, res,next) => {
   const user = await User.findById(req.user);
   if (!user) {
     return next(new ErrorHandler("User not found", 404));
@@ -66,8 +68,10 @@ const logout = TryCatch(async (req, res) => {
     });
 });
 
-const searchUser = TryCatch(async (req, res) => {
+// Search for a user
+const searchUser = TryCatch(async (req, res,) => {
   const { name } = req.query;
+  // finding all my chats
   const myChats = await Chat.find({
     groupChat: false,
     members: req.user,
@@ -82,6 +86,7 @@ const searchUser = TryCatch(async (req, res) => {
     name: { $regex: name, $options: "i" },
   });
 
+  // modify the response
   const users = allUsersExceptMeAndFriends.map(({ _id, name, avatar }) => ({
     _id,
     name,
@@ -92,4 +97,99 @@ const searchUser = TryCatch(async (req, res) => {
     users,
   });
 });
-export { login, newUser, getMyProfile, logout, searchUser };
+
+// Send friend request
+const sendFriendRequest = TryCatch(async (req, res,next) => {
+  const { userId } = req.body;
+  const request = await Request.findOne({
+    $or: [
+      { sender: req.user, receiver: userId },
+      { sender: userId, receiver: req.user },
+    ],
+  });
+  if (request) {
+    return next(new ErrorHandler("Request already sent", 400));
+  }
+  await Request.create({
+    sender: req.user,
+    receiver: userId,
+  });
+  emitEvent(userId, NEW_REQUEST, [userId]);
+
+  return res.status(200).json({
+    success: true,
+    message: "Friend Request Sent",
+  });
+});
+
+const acceptFriendRequest = TryCatch(async (req, res,next) => {
+  const { requestId ,accept} = req.body;
+  const request = await Request.findById(requestId)
+    .populate("sender", "name")
+    .populate("receiver", "name");
+
+    // console.log(request);
+  if (!request) {
+    return next(new ErrorHandler("Request not found", 404));
+  }
+  if (!request.receiver) {
+    return next(new ErrorHandler("Receiver not found in the request", 404));
+  }
+  if (request.receiver._id.toString() !== req.user.toString()) {
+    return next(
+      new ErrorHandler("You are not authorized to accept this request", 401)
+    );
+  }
+
+  if (!accept) {
+    
+    await request.deleteOne();
+    return res
+    .status(200)
+    .json({
+      success: true,
+      message: `Friend Request from ${request.sender.name} rejected`,
+    });
+}
+    const members = [request.sender.id, request.receiver.id]
+    await Promise.all([
+      Chat.create({ members, name: `${request.sender.name} and ${request.receiver.name}` }),
+      request.deleteOne(),
+    ]);
+    emitEvent(req,REFETCH_CHATS,members);
+  return res.status(200).json({
+    success: true,
+    message: `Friend Request from ${request.sender.name} accepted`,
+    senderId : request.sender._id
+  });
+});
+
+
+// Get all notifications
+const getAllNotification = TryCatch(async (req, res) => {  
+  const requests = await Request.find({ receiver: req.user })
+    .populate("sender", "name avatar")
+    
+    const allRequest = requests.map(({ id, sender }) => ({
+      id,
+      sender:{
+        id: sender.id,
+        name: sender.name,
+        avatar: sender.avatar.url,
+      },
+    }));
+  res.status(200).json({
+    success: true,
+    allRequest,
+  });
+})
+export {
+  getMyProfile,
+  login,
+  logout,
+  newUser,
+  searchUser,
+  sendFriendRequest,
+  acceptFriendRequest,
+  getAllNotification,
+};
