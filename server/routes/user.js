@@ -1,5 +1,5 @@
 import express from "express";
-import { acceptFriendRequest, getAllNotification, getMyProfile, login, logout, newUser, searchUser, sendFriendRequest } from "../controllers/user.js";
+import { acceptFriendRequest, getAllNotification, getMyFriends, getMyProfile, login, logout, newUser, searchUser, sendFriendRequest } from "../controllers/user.js";
 import { acceptFreindRequestValidator, loginValidator, registerValidator, sendFreindRequestValidator, validateHandler } from "../lib/validators.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 import { singleAvatar } from "../middlewares/multer.js";
@@ -25,6 +25,6 @@ app.put("/sendrequest",sendFreindRequestValidator(),validateHandler,sendFriendRe
 app.put("/acceptrequest",acceptFreindRequestValidator(),validateHandler,acceptFriendRequest);
 app.get("/notifications",getAllNotification)
 
-app.get("/friends",getAllNotification)
+app.get("/friends",getMyFriends)
 
 export default app;

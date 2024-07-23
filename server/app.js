@@ -1,12 +1,11 @@
-import express from "express";
-import { connectDB } from "./utils/features.js";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import express from "express";
 import { errorMiddleware } from "./middlewares/error.js";
-import userRoute from "./routes/user.js";
 import chatRoute from './routes/chat.js';
-import { createGroupChats, createMesagesInChat, createSingleChats,  } from "./seeders/chat.js";
-import {createUser} from "./seeders/user.js";
+import userRoute from "./routes/user.js";
+import { connectDB } from "./utils/features.js";
+import adminRoute from "./routes/admin.js";
 
 const app = express();
 
@@ -26,7 +25,7 @@ connectDB(mongoURI);
 // createUser(10);
 app.use("/user", userRoute);
 app.use("/chat", chatRoute); 
-
+app.use("/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
