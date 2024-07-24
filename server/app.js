@@ -17,6 +17,8 @@ dotenv.config({ path: "./.env" });
 const mongoURI = process.env.MONGO_URI;
 
 const port = process.env.PORT || 3000;
+
+const adminSecretKey = process.env.ADMIN_SECRET_KEY||"admin1234";
 connectDB(mongoURI);
 
 // createMesagesInChat("669a6a6782f92d78acb8a46b",50)
@@ -35,3 +37,5 @@ app.use(errorMiddleware);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+export {adminSecretKey}

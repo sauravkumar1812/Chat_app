@@ -5,13 +5,14 @@ import { User } from "../models/User.js";
 import {cookieOptions} from "../utils/features.js";
 import jwt from "jsonwebtoken";
 import { ErrorHandler } from "../utils/utility.js";
+import { adminSecretKey } from "../app.js";
 
 // Admin Login
 const adminLogin = TryCatch(async (req, res,next) => {
   // console.log(secretKey);
   const {secretKey} = req.body;
-   
-  if(secretKey !== process.env.ADMIN_SECRET_KEY){
+   const isMatched = secretKey ===adminSecretKey;
+  if(!isMatched){
     return next(new ErrorHandler("Invalid Admin Key",401));
   }
  
@@ -20,6 +21,21 @@ const adminLogin = TryCatch(async (req, res,next) => {
     success:true, 
     message:"Authenticated Successfully , Welcome Admin",
    });
+})
+// Admin Logout
+const adminLogOut = TryCatch(async (req, res,next) => {
+
+  return res.status(200).cookie("Chat_admin_token","",{...cookieOptions,maxAge : 0}).json({
+   success:true, 
+   message:"LogOut Successfully , Thank You Admin",
+  });
+})
+// Verify Admin
+const VerifyAdmin = TryCatch(async (req,res,next) =>{
+    return res.status(200).json({
+      admin:true,
+      message:"Admin verifed Thank You"
+    })
 })
 
 // get all users
@@ -153,12 +169,7 @@ last7DaysMessages.forEach(messages=>{
   return res.status(200).json({ success: true, messages: stats });
 });
 
-const adminLogOut = TryCatch(async (req, res,next) => {
 
-   return res.status(200).cookie("Chat_admin_token","",{...cookieOptions,maxAge : 0}).json({
-    success:true, 
-    message:"LogOut Successfully , Thank You Admin",
-   });
-})
-export { allChats, allMessages, getAllUsers, getDashboardStats,adminLogin,adminLogOut};
+
+export { allChats, allMessages, getAllUsers, getDashboardStats,adminLogin,adminLogOut,VerifyAdmin};
 
