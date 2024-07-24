@@ -7,7 +7,7 @@ const app = express.Router();
 
 app.get("/")
 app.post("/verify",adminLoginValidator(),validateHandler, adminLogin)
-app.get("logout",adminLogOut)
+app.get("/logout",adminLogOut)
 app.get("/users",getAllUsers)
 app.get("/chats",allChats)
 app.get("/messages",allMessages)

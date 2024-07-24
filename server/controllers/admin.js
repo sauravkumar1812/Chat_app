@@ -154,17 +154,10 @@ last7DaysMessages.forEach(messages=>{
 });
 
 const adminLogOut = TryCatch(async (req, res,next) => {
-  // console.log(secretKey);
-  const {secretKey} = req.body;
-   
-  if(secretKey !== process.env.ADMIN_SECRET_KEY){
-    return next(new ErrorHandler("Invalid Admin Key",401));
-  }
- 
-   const token = jwt.sign(secretKey,process.env.JWT_SECRET);
-   return res.status(200).cookie("Chat_admin_token",token,{...cookieOptions,maxAge : 1000*60*15}).json({
+
+   return res.status(200).cookie("Chat_admin_token","",{...cookieOptions,maxAge : 0}).json({
     success:true, 
-    message:"Authenticated Successfully , Welcome Admin",
+    message:"LogOut Successfully , Thank You Admin",
    });
 })
 export { allChats, allMessages, getAllUsers, getDashboardStats,adminLogin,adminLogOut};
