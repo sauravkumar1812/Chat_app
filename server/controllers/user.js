@@ -7,14 +7,17 @@ import { User } from "../models/User.js";
 import { cookieOptions, emitEvent, sendToken } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { getOtherMember } from "../lib/helper.js";
-import { createUser } from "../seeders/user.js";
+// import { createUser } from "../seeders/user.js";
 
 
 
 // Create a new user and store in database and save in cookies
-const newUser = async (req, res, next) => {
+const newUser = TryCatch(async (req, res, next) => {
   const { name, username, password, bio } = req.body;
-  console.log(req.body);
+     const file = req.file;
+  if(!file){
+    return next(new ErrorHandler("Please upload a file",400));
+  }
 
   const avatar = {
     public_id: "saurav_ka_photo",
@@ -23,7 +26,8 @@ const newUser = async (req, res, next) => {
   const user = await User.create({ name, bio, username, password, avatar });
 
   sendToken(res, user, 201, "User created");
-};
+})
+
 
 // Login user and save cookies use tryCatch as a middleware
 const login = async (req, res, next) => {

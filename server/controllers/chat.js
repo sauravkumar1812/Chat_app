@@ -228,12 +228,19 @@ const leaveGroup = TryCatch(async (req, res, next) => {
 // Send Attachment file
 const sendAttachments = TryCatch(async (req, res, next) => {
   const { chatId } = req.body;
+  const files = req.files || [];
+  if(files.length > 1){
+    return next(new ErrorHandler("Please Upload a attachment", 400));
+  }
+  if(files.length > 5) {
+   return next(new ErrorHandler("You can only upload 5 attachments at a time", 400));
+  }
   const [chat, me] = await Promise.all([
     Chat.findById(chatId),
     User.findById(req.user, "name"),
   ]);
 
-  const files = req.files || [];
+  
   if (!chat) {
     return next(new ErrorHandler("Chat  not found", 404));
   }

@@ -17,7 +17,7 @@ const registerValidator = () => [
   body("username", "Please Enter Username").notEmpty(),
   body("bio", "Please Enter Bio").notEmpty(),
   body("password", "Please Enter Password").notEmpty(),
-  check("avatar", "Please Upload Avatar").notEmpty(),
+  
 ];
 
 //   Login Validator
@@ -59,10 +59,7 @@ const leaveGroupValidator = () => [
 // sendAttachments Member Validator
 const sendAttachmentValidator = () => [
   body("Chatid", "Please Enter ChatId").notEmpty(),
-  check("files", "Please Upload Attachments")
-    .notEmpty()
-    .isArray({ min: 1, max: 10 })
-    .withMessage("Attachments must be 1-10"),
+ 
 ];
 
 //   getMessages Validator & getChatDetails validators & leave group validators & delete chat validators

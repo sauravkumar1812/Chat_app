@@ -18,6 +18,7 @@ const mongoURI = process.env.MONGO_URI;
 
 const port = process.env.PORT || 3000;
 
+const envMode = process.env.NODE_ENV.trim() ||"PRODUCTION";
 const adminSecretKey = process.env.ADMIN_SECRET_KEY||"admin1234";
 connectDB(mongoURI);
 
@@ -30,12 +31,12 @@ app.use("/chat", chatRoute);
 app.use("/admin", adminRoute);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello Saurav");
 });
 
 app.use(errorMiddleware);
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port} in ${envMode} mode`);
 });
 
-export {adminSecretKey}
+export {adminSecretKey,envMode};
