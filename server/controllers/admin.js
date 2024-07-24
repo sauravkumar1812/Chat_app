@@ -1,7 +1,25 @@
 import { TryCatch } from "../middlewares/error.js";
-import { Chat } from "../models/Chat.js";
+import { Chat } from "../models/chat.js";
 import { Message } from "../models/message.js";
 import { User } from "../models/User.js";
+import {cookieOptions} from "../utils/features.js";
+import jwt from "jsonwebtoken";
+import { ErrorHandler } from "../utils/utility.js";
+
+const adminLogin = TryCatch(async (req, res,next) => {
+  // console.log(secretKey);
+  const {secretKey} = req.body;
+   
+  if(secretKey !== process.env.ADMIN_SECRET_KEY){
+    return next(new ErrorHandler("Invalid Admin Key",401));
+  }
+ 
+   const token = jwt.sign(secretKey,process.env.JWT_SECRET);
+   return res.status(200).cookie("Chat_admin_token",token,{...cookieOptions,maxAge : 1000*60*15}).json({
+    success:true, 
+    message:"Authenticated Successfully , Welcome Admin",
+   });
+})
 
 // get all users
 const getAllUsers = TryCatch(async (req, res) => {
@@ -32,7 +50,7 @@ const allChats = TryCatch(async (req, res) => {
     .populate("creator", "name avatar");
 
   const transformedChats = await Promise.all(
-    chats.map(async ({  id, members, groupChat, creator }) => {
+    chats.map(async ({ id, members, groupChat, creator }) => {
       const totalMessages = await Message.countDocuments({ chat: id });
       return {
         id,
@@ -56,28 +74,82 @@ const allChats = TryCatch(async (req, res) => {
 });
 
 // all Messages
-
 const allMessages = TryCatch(async (req, res) => {
+  try {
     const messages = await Message.find({})
-    .populate("sender", "name avatar")
-    .populate("chat", "groupChat");
- 
-    const transformedMessages = messages.map( ({ content, attachments, id, sender, createdAt, chat }) => ({
-          id:id,
+      .populate("sender", "name avatar")
+      .populate("chat", "groupChat");
+
+    const transformedMessages = messages
+      .map((message) => {
+        const { content, attachments, _id, sender, createdAt, chat } = message;
+
+        if (!chat || !sender) {
+          console.error("Chat or sender is not populated:", message);
+          return null;
+        }
+
+        return {
+          id: _id,
           attachments,
           content,
           createdAt,
-          chat: chat.id,
+          chat: chat._id,
           groupChat: chat.groupChat,
           sender: {
             id: sender._id,
             name: sender.name,
             avatar: sender.avatar.url,
           },
-        })
-      );
- 
-  return res.status(200).json({ success: true, messages: transformedMessages });
+        };
+      })
+      .filter((message) => message !== null);
+
+    return res
+      .status(200)
+      .json({ success: true, messages: transformedMessages });
+  } catch (error) {
+    console.error("Error fetching or transforming messages:", error);
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
 });
 
-export { getAllUsers, allChats, allMessages };
+
+// Get Dashboard Stats
+const getDashboardStats = TryCatch(async (req, res) => {
+  const [
+    groupsCount,
+    usersCount,
+    messagesCount,
+    totalChatsCount,
+  ] = await Promise.all([
+    Chat.countDocuments({ groupChat: true }),
+    User.countDocuments({}),
+    Message.countDocuments({}),
+    Chat.countDocuments({}),
+  ]);
+
+  const today = new Date();
+  const last7Days = new Date();
+  last7Days.setDate(today.getDate() - 7);
+  const last7DaysMessages = await Message.find({
+    createdAt: { $gte: last7Days, $lt: today },
+  }).select("createdAt");
+
+  const messages = new Array(7).fill(0);
+last7DaysMessages.forEach(messages=>{
+  const indexApprox = (today.getTime()-messages.createdAt.getTime()/1000*60*60*24);
+  const index = Math.floor(indexApprox);
+  messages[6-index]++;
+})
+  const stats = {
+    groupsCount,
+    usersCount,
+    messagesCount,
+    totalChatsCount,
+    messagesChart: messages,
+  };
+  return res.status(200).json({ success: true, messages: stats });
+});
+export { allChats, allMessages, getAllUsers, getDashboardStats,adminLogin};
+

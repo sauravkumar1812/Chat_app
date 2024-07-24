@@ -1,5 +1,5 @@
 import { faker, simpleFaker } from "@faker-js/faker";
-import { Chat } from "../models/Chat.js";
+import { Chat } from "../models/chat.js";
 import { User } from "../models/User.js";
 import { Message } from "../models/message.js";
 
@@ -40,7 +40,7 @@ const createGroupChats = async (numChats) => {
         }
       }
       const tempChat = Chat.create({
-        groupChat: false,
+        groupChat: true,
         name: faker.lorem.word(1),
         members,
         creator: members[0],
@@ -82,7 +82,7 @@ const createMessages = async (numMessages) => {
 
 const createMesagesInChat = async ( chatId,numMessages) => {
   try {
-    const users = await User.find().select("_id");
+    const users = await User.find().select("id");
 
     const messagePromise = [];
     for (let i = 0; i < numMessages; i++) {
@@ -104,4 +104,4 @@ const createMesagesInChat = async ( chatId,numMessages) => {
 };
 
 
-export { createSingleChats, createGroupChats, createMesagesInChat, };
+export { createSingleChats, createGroupChats, createMesagesInChat,createMessages };

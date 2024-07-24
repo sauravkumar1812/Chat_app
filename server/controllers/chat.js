@@ -6,11 +6,18 @@ import {
 } from "../constants/events.js";
 import { getOtherMember } from "../lib/helper.js";
 import { TryCatch } from "../middlewares/error.js";
-import { Chat } from "../models/Chat.js";
+import { Chat } from "../models/chat.js";
 import { User } from "../models/User.js";
 import { Message } from "../models/message.js";
 import { deleteFilesFromCloudinary, emitEvent } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
+import { createGroupChats, createSingleChats,createMessages,createMesagesInChat } from "../seeders/chat.js";
+
+
+// createSingleChats(10);
+// createGroupChats(10);
+// createMessages(10);
+// createMesagesInChat(10)
 
 // Cretae a new group chat
 const newGroupChat = TryCatch(async (req, res, next) => {

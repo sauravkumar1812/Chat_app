@@ -1,5 +1,3 @@
-
-
 import mongoose ,{ model,Schema,Types } from "mongoose";
 const schema = new Schema(
   {
@@ -9,13 +7,12 @@ const schema = new Schema(
       required: true,
     },
     chat: {
-      type: Types.ObjectId,
-      ref: "User",
+      type:Types.ObjectId,
+      ref: "Chat",
       required: true,
     },
-    content: {
-      type: String,
-    },
+    content: String,
+  
     attachments: [
       {public_id: {
         type: String,
@@ -24,7 +21,7 @@ const schema = new Schema(
       url: {
         type: String,
         required: true,
-      }},
+      },},
     ],
   },
   { timestamps: true }

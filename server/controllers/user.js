@@ -1,12 +1,15 @@
 import { compare } from "bcrypt";
 import { NEW_REQUEST, REFETCH_CHATS } from "../constants/events.js";
 import { TryCatch } from "../middlewares/error.js";
-import { Chat } from "../models/Chat.js";
+import { Chat } from "../models/chat.js";
 import { Request } from "../models/Request.js";
 import { User } from "../models/User.js";
 import { cookieOptions, emitEvent, sendToken } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { getOtherMember } from "../lib/helper.js";
+import { createUser } from "../seeders/user.js";
+
+
 
 // Create a new user and store in database and save in cookies
 const newUser = async (req, res, next) => {

@@ -1,6 +1,5 @@
-import { Chat } from "../models/Chat.js";
+import { faker } from "@faker-js/faker";
 import { User } from "../models/User.js";
-import {faker, simpleFaker} from "@faker-js/faker";
 const createUser = async (numUsers) => {
   try {
     const userPromise = [];

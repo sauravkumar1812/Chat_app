@@ -70,24 +70,31 @@ const getMessagesValidator = () => [
   param("id", "Please Enter ChatId").notEmpty(),
 ];
 
-
 // Rename Group Validator
 const renameGroupValidator = () => [
-    param("id", "Please Enter ChatId").notEmpty(),
-    body("name", "Please Enter New Name").notEmpty(),
-]
+  param("id", "Please Enter ChatId").notEmpty(),
+  body("name", "Please Enter New Name").notEmpty(),
+];
 
 // sendFreindRequest Validator
 const sendFreindRequestValidator = () => [
-  
   body("userId", "Please Enter UserId").notEmpty(),
-]
+];
 // acceptFreindRequest Validator
 const acceptFreindRequestValidator = () => [
-  
   body("requestId", "Please Enter RequestId").notEmpty(),
-  body("accept", ).notEmpty().withMessage("Please Add Accept").isBoolean().withMessage("Accept must be a boolean"),
-]
+  body("accept")
+    .notEmpty()
+    .withMessage("Please Add Accept")
+    .isBoolean()
+    .withMessage("Accept must be a boolean"),
+];
+
+// Admin Login Validator
+
+const adminLoginValidator = () => [
+  body("secretKey", "Please Enter Secret Key").notEmpty(),
+];
 export {
   addNewMemberValidator,
   getMessagesValidator,
@@ -100,5 +107,6 @@ export {
   validateHandler,
   renameGroupValidator,
   sendFreindRequestValidator,
-  acceptFreindRequestValidator
+  acceptFreindRequestValidator,
+  adminLoginValidator,
 };
