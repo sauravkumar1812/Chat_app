@@ -42,10 +42,7 @@ app.get("/", (req, res) => {
   res.send("Hello Saurav");
 });
 
-
-io.use((socket,next) => {
-  
-})
+io.use((socket, next) => {});
 io.on("connection", (socket) => {
   const user = {
     id: "saukr",
@@ -73,15 +70,14 @@ io.on("connection", (socket) => {
       sender: user.id,
       chat: chatId,
     };
-    const memberSocket = getSockets(members)
-    io.to(memberSocket).emit(NEW_MESSAGE,{chatId,messageForRealTime});
-    io.to(memberSocket).emit(NEW_MESSAGE,{chatId});
-   try {
-    await Message.create(messageForDB);
-   } catch (error) {
-     console.log(error);
-    
-   }
+    const memberSocket = getSockets(members);
+    io.to(memberSocket).emit(NEW_MESSAGE, { chatId, messageForRealTime });
+    io.to(memberSocket).emit(NEW_MESSAGE, { chatId });
+    try {
+      await Message.create(messageForDB);
+    } catch (error) {
+      console.log(error);
+    }
     console.log("New Message", messageForRealTime);
   });
   socket.on("disconnect", () => {
