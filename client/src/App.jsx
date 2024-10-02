@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userExists, userNotExists } from "./redux/reducers/auth";
 import { Toaster } from "react-hot-toast";
 import { SocketProvider } from "./socket";
+;
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
@@ -17,11 +18,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
-const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
-const ChatManagement = lazy(() => import("./pages/admin/ChatManagement"));
-const MessagesManagement = lazy(() =>
-  import("./pages/admin/MessageManagement")
-);
+const UserManagement = lazy(()=>import("./pages/admin/UserManagment"))
+const ChatManagement = lazy(() => import("./pages/admin/ChatManagment"));
+const MessagesManagement = lazy(()=>import("./pages/admin/MessageManagment"))
 
 const App = () => {
   const { user, loader } = useSelector((state) => state.auth);
