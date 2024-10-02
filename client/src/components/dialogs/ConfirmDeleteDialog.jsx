@@ -1,12 +1,12 @@
-import React from 'react';
 import {
+  Button,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
-  Button
-} from '@mui/material';
+  DialogTitle,
+} from "@mui/material";
+import React from "react";
 
 const ConfirmDeleteDialog = ({ open, handleClose, deleteHandler }) => {
   return (
@@ -19,7 +19,9 @@ const ConfirmDeleteDialog = ({ open, handleClose, deleteHandler }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>No</Button>
-        <Button onClick={deleteHandler} color="error">Yes</Button>
+        <Button onClick={deleteHandler} color="error">
+          Yes
+        </Button>
       </DialogActions>
     </Dialog>
   );
