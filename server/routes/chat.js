@@ -1,31 +1,32 @@
 import express from "express";
-import { isAuthenticated } from "../middlewares/auth.js";
 import {
   addMembers,
   deleteChat,
   getChatDetails,
   getMessages,
   getMyChats,
-  getMyGroup,
+  getMyGroups,
   leaveGroup,
   newGroupChat,
   removeMember,
   renameGroup,
   sendAttachments,
 } from "../controllers/chat.js";
-import { attachmentsMulter } from "../middlewares/multer.js";
 import {
-  addNewMemberValidator,
-  getMessagesValidator,
-  leaveGroupValidator,
+  addMemberValidator,
+  chatIdValidator,
   newGroupValidator,
   removeMemberValidator,
-  renameGroupValidator,
-  sendAttachmentValidator,
+  renameValidator,
+  sendAttachmentsValidator,
   validateHandler,
 } from "../lib/validators.js";
+import { isAuthenticated } from "../middlewares/auth.js";
+import { attachmentsMulter } from "../middlewares/multer.js";
 
 const app = express.Router();
+
+// After here user must be logged in to access the routes
 
 app.use(isAuthenticated);
 
@@ -33,26 +34,36 @@ app.post("/new", newGroupValidator(), validateHandler, newGroupChat);
 
 app.get("/my", getMyChats);
 
-app.get("/my/groups", getMyGroup);
-app.put("/addmembers", addNewMemberValidator(), validateHandler, addMembers);
+app.get("/my/groups", getMyGroups);
+
+app.put("/addmembers", addMemberValidator(), validateHandler, addMembers);
+
 app.put(
   "/removemember",
   removeMemberValidator(),
   validateHandler,
   removeMember
 );
-app.delete("/leave/:id", getMessagesValidator(), validateHandler, leaveGroup);
+
+app.delete("/leave/:id", chatIdValidator(), validateHandler, leaveGroup);
+
+// Send Attachments
 app.post(
   "/message",
   attachmentsMulter,
-  sendAttachmentValidator(),
+  sendAttachmentsValidator(),
   validateHandler,
   sendAttachments
 );
-app.get("/message/:id", getMessagesValidator(), validateHandler, getMessages);
+
+// Get Messages
+app.get("/message/:id", chatIdValidator(), validateHandler, getMessages);
+
+// Get Chat Details, rename,delete
 app
   .route("/:id")
-  .get(getMessagesValidator(), validateHandler, getChatDetails)
-  .put(renameGroupValidator(), validateHandler, renameGroup)
-  .delete(getMessagesValidator(), validateHandler,deleteChat);
+  .get(chatIdValidator(), validateHandler, getChatDetails)
+  .put(renameValidator(), validateHandler, renameGroup)
+  .delete(chatIdValidator(), validateHandler, deleteChat);
+
 export default app;
