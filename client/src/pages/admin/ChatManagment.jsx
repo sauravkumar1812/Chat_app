@@ -1,10 +1,13 @@
-import { Avatar, Stack } from "@mui/material";
+import { useFetchData } from "6pp";
+import { Avatar, Skeleton, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AvatarCard from "../../components/shared/AvatarCard";
 import Table from "../../components/shared/Table";
-import { dashboardData } from "../../constants/sampleData";
+import { server } from "../../constants/config";
+import { useErrors } from "../../hooks/hook";
 import { transformImage } from "../../lib/features";
+
 const columns = [
   {
     field: "id",
@@ -19,26 +22,31 @@ const columns = [
     width: 150,
     renderCell: (params) => <AvatarCard avatar={params.row.avatar} />,
   },
+
   {
     field: "name",
-    headerName: " Name",
+    headerName: "Name",
     headerClassName: "table-header",
     width: 300,
-    editable: true,
+  },
+
+  {
+    field: "groupChat",
+    headerName: "Group",
+    headerClassName: "table-header",
+    width: 100,
   },
   {
-    field: "totalmembers",
+    field: "totalMembers",
     headerName: "Total Members",
     headerClassName: "table-header",
     width: 120,
-    editable: true,
   },
   {
     field: "members",
     headerName: "Members",
     headerClassName: "table-header",
     width: 400,
-    editable: true,
     renderCell: (params) => (
       <AvatarCard max={100} avatar={params.row.members} />
     ),
@@ -48,16 +56,14 @@ const columns = [
     headerName: "Total Messages",
     headerClassName: "table-header",
     width: 120,
-    editable: true,
   },
   {
     field: "creator",
     headerName: "Created By",
     headerClassName: "table-header",
     width: 250,
-    editable: true,
     renderCell: (params) => (
-      <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+      <Stack direction="row" alignItems="center" spacing={"1rem"}>
         <Avatar alt={params.row.creator.name} src={params.row.creator.avatar} />
         <span>{params.row.creator.name}</span>
       </Stack>
@@ -65,29 +71,47 @@ const columns = [
   },
 ];
 
-const ChatManagment = () => {
+const ChatManagement = () => {
+  const { loading, data, error } = useFetchData(
+    `${server}/api/v1/admin/chats`,
+    "dashboard-chats"
+  );
+
+  useErrors([
+    {
+      isError: error,
+      error: error,
+    },
+  ]);
+
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    setRows(
-      dashboardData.chats.map((i) => ({
-        ...i,
-        id: i._id,
-        avatar: transformImage(i.avatar, 50),
-        members: i.members.map((j) => j.avatar),
-        creator: {
-          name: i.creator.name,
-          avatar: i.creator.avatar,
-        },
-        
-      }))
-    );
-  }, []);
+    if (data) {
+      setRows(
+        data.chats.map((i) => ({
+          ...i,
+          id: i._id,
+          avatar: i.avatar.map((i) => transformImage(i, 50)),
+          members: i.members.map((i) => transformImage(i.avatar, 50)),
+          creator: {
+            name: i.creator.name,
+            avatar: transformImage(i.creator.avatar, 50),
+          },
+        }))
+      );
+    }
+  }, [data]);
+
   return (
     <AdminLayout>
-      <Table heading={"All Chats"} columns={columns} rows={rows} />
+      {loading ? (
+        <Skeleton height={"100vh"} />
+      ) : (
+        <Table heading={"All Chats"} columns={columns} rows={rows} />
+      )}
     </AdminLayout>
   );
 };
 
-export default ChatManagment;
+export default ChatManagement;

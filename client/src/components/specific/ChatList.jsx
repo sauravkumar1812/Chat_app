@@ -1,32 +1,36 @@
-import React from "react";
 import { Stack } from "@mui/material";
+import React from "react";
 import ChatItem from "../shared/ChatItem";
-import { bgColorGradint } from "../../constants/color";
 
 const ChatList = ({
-  width = "100%",
+  w = "100%",
   chats = [],
   chatId,
-  onlineusers = [],
+  onlineUsers = [],
   newMessagesAlert = [
     {
-      chatId: "1",
+      chatId: "",
       count: 0,
     },
   ],
   handleDeleteChat,
 }) => {
   return (
-    <Stack width={width} direction={"column"} overflow={"auto"} height={"100%"}>
+    <Stack width={w} direction={"column"} overflow={"auto"} height={"100%"}>
       {chats?.map((data, index) => {
         const { avatar, _id, name, groupChat, members } = data;
+
         const newMessageAlert = newMessagesAlert.find(
-          chatId  => alert.chatId === _id
+          ({ chatId }) => chatId === _id
         );
-        const isOnline = members?.some((member) => onlineusers.includes(_id));
+
+        const isOnline = members?.some((member) =>
+          onlineUsers.includes(member)
+        );
+
         return (
           <ChatItem
-          index={index}
+            index={index}
             newMessageAlert={newMessageAlert}
             isOnline={isOnline}
             avatar={avatar}

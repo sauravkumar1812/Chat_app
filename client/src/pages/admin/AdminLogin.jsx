@@ -1,73 +1,95 @@
-import React from "react";
-import { Container, Paper, Typography, TextField, Button, Avatar,Stack , IconButton } from "@mui/material";
-import { bgColorGradint } from "../../constants/color";
 import { useInputValidation } from "6pp";
+import {
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography
+} from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-
-    const isAdmin = true;
+import { bgGradient } from "../../constants/color";
+import { adminLogin, getAdmin } from "../../redux/thunks/admin";
 
 const AdminLogin = () => {
+  const { isAdmin } = useSelector((state) => state.auth);
 
-    const secretkey = useInputValidation("");
-    const submitHandler =(e) =>{
-   e.preventDefault();
-   console.log("submit")
-    }
-    if(isAdmin) return <Navigate to="/admin/dashboard"/>
-  return( <div 
-    style={{
-      backgroundImage:bgColorGradint
-    }}
+  const dispatch = useDispatch();
+
+  const secretKey = useInputValidation("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(adminLogin(secretKey.value));
+  };
+
+  useEffect(() => {
+    dispatch(getAdmin());
+  }, [dispatch]);
+
+  if (isAdmin) return <Navigate to="/admin/dashboard" />;
+
+  return (
+    <div
+      style={{
+        backgroundImage: bgGradient,
+      }}
     >
-    <Container component="main" maxWidth="xs" sx={{
-      height:"100vh",
-      display:"flex",
-      justifyContent:"center",
-      alignItems:"center",
-    }}>
-      <Paper
-        elevation={3}
+      <Container
+        component={"main"}
+        maxWidth="xs"
         sx={{
-          padding: 4,
+          height: "100vh",
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
-       
-            <Typography variant="h5">Admin  Login</Typography>
-
-            <form style={{
-              width:"100%",
-              marginTop:"1rem",
+        <Paper
+          elevation={3}
+          sx={{
+            padding: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h5">Admin Login</Typography>
+          <form
+            style={{
+              width: "100%",
+              marginTop: "1rem",
             }}
-            onSubmit = {submitHandler}
+            onSubmit={submitHandler}
+          >
+            <TextField
+              required
+              fullWidth
+              label="Secret Key"
+              type="password"
+              margin="normal"
+              variant="outlined"
+              value={secretKey.value}
+              onChange={secretKey.changeHandler}
+            />
+
+            <Button
+              sx={{
+                marginTop: "1rem",
+              }}
+              variant="contained"
+              color="primary"
+              type="submit"
+              fullWidth
             >
-              <TextField
-                required
-                fullWidth
-                label="Secret Key"
-                margin="normal"
-                type="password"
-                variant="outlined"
-                value={secretkey.value}
-                onChange={secretkey.changeHandler}
-/>
-              <Button
-                sx={{
-                  marginTop: "1rem",
-                }}
-                fullWidth
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Log  in
-              </Button>
-            </form>
-      </Paper>
-    </Container>
-    </div>)
+              Login
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </div>
+  );
 };
 
 export default AdminLogin;
