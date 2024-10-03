@@ -24,7 +24,7 @@ import {
 } from "../../components/styles/StyledComponents";
 import { matBlack } from "../../constants/color";
 import { server } from "../../constants/config";
-import { useErrors } from "../../hooks/hook";
+import {useErrors} from "../../hooks/hooks"
 
 const Dashboard = () => {
   const { loading, data, error } = useFetchData(
