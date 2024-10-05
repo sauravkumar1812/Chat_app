@@ -50,7 +50,7 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        `${server}/api/v1/user/login`,
+        `https://chat-app-7icu.onrender.com/api/v1/user/login`,
         {
           username: username.value,
           password: password.value,
