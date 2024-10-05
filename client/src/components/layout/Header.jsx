@@ -34,7 +34,7 @@ import { resetNotificationCount } from "../../redux/reducers/chat";
 
 const SearchDialog = lazy(() => import("../specific/Search"));
 const NotifcationDialog = lazy(() => import("../specific/Notifications"));
-const NewGroupDialog = lazy(() => import("../specific/NewGroup"));
+const NewGroupDialog = lazy(() => import("../specific/NewGroups"));
 
 const Header = () => {
   const navigate = useNavigate();

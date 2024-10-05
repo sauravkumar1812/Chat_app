@@ -7,7 +7,7 @@ import {
   ExitToApp as ExitToAppIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useAsyncMutation } from "../../hooks/hook";
+import { useAsyncMutation } from "../../hooks/hooks";
 import {
   useDeleteChatMutation,
   useLeaveGroupMutation,
