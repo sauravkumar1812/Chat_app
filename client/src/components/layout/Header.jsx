@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { server } from "../../constants/config";
+// import { server } from "../../constants/config";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userNotExists } from "../../redux/reducers/auth";
@@ -62,7 +62,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get(`${server}/api/v1/user/logout`, {
+      const { data } = await axios.get(`https://chat-app-7icu.onrender.com/api/v1/user/logout`, {
         withCredentials: true,
       });
       dispatch(userNotExists());

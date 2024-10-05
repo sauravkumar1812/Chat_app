@@ -92,7 +92,7 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        `${server}/api/v1/user/new`,
+        `https://chat-app-7icu.onrender.com/api/v1/user/new`,
         formData,
         config
       );

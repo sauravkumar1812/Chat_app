@@ -28,7 +28,7 @@ import {useErrors} from "../../hooks/hooks"
 
 const Dashboard = () => {
   const { loading, data, error } = useFetchData(
-    `${server}/api/v1/admin/stats`,
+    `https://chat-app-7icu.onrender.com/api/v1/admin/stats`,
     "dashboard-stats"
   );
 

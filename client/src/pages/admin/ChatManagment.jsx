@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AvatarCard from "../../components/shared/AvatarCard";
 import Table from "../../components/shared/Table";
-import { server } from "../../constants/config";
+// import { server } from "../../constants/config";
 import { useErrors } from "../../hooks/hook";
 import { transformImage } from "../../lib/features";
 
@@ -73,7 +73,7 @@ const columns = [
 
 const ChatManagement = () => {
   const { loading, data, error } = useFetchData(
-    `${server}/api/v1/admin/chats`,
+    `https://chat-app-7icu.onrender.com/api/v1/admin/chats`,
     "dashboard-chats"
   );
 
