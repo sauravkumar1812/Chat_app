@@ -5,7 +5,7 @@ import AdminLayout from "../../components/layout/AdminLayout";
 import AvatarCard from "../../components/shared/AvatarCard";
 import Table from "../../components/shared/Table";
 // import { server } from "../../constants/config";
-import { useErrors } from "../../hooks/hook";
+import { useErrors } from "../../hooks/hooks";
 import { transformImage } from "../../lib/features";
 
 const columns = [

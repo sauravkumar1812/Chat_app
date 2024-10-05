@@ -13,7 +13,7 @@ import {
   useAddGroupMembersMutation,
   useAvailableFriendsQuery,
 } from "../../redux/api/api";
-import { useAsyncMutation, useErrors } from "../../hooks/hook";
+import { useAsyncMutation, useErrors } from "../../hooks/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAddMember } from "../../redux/reducers/misc";
 const AddMemberDialog = ({ chatId }) => {
