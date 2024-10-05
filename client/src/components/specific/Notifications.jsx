@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAsyncMutation, useErrors } from "../../hooks/hook";
+import { useAsyncMutation, useErrors } from "../../hooks/hooks";
 import {
   useAcceptFriendRequestMutation,
   useGetNotificationsQuery,

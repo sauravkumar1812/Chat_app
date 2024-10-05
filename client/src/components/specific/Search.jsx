@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAsyncMutation } from "../../hooks/hook";
+import { useAsyncMutation } from "../../hooks/hooks";
 import {
   useLazySearchUserQuery,
   useSendFriendRequestMutation,
