@@ -2,6 +2,7 @@ import { TryCatch } from "./error.js";
 import jwt from "jsonwebtoken";
 import { ErrorHandler } from "../utils/utility.js";
 import { adminSecretKey } from "../app.js";
+import { CHATTU_TOKEN } from "../constants/config.js";
 import("dotenv").config;
 const  isAuthenticated  =TryCatch(async (req, res, next) => {
 
