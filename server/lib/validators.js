@@ -1,32 +1,17 @@
 import { body, param, validationResult } from "express-validator";
 import { ErrorHandler } from "../utils/utility.js";
 
-// const validateHandler = (req, res, next) => {
-//   const errors = validationResult(req);
-
-//   const errorMessages = errors
-//     .array()
-//     .map((error) => error.msg)
-//     .join(", ");
-
-//   if (errors.isEmpty()) return next();
-//   else next(new ErrorHandler(errorMessages, 400));
-// };
-
 const validateHandler = (req, res, next) => {
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    const errorMessages = errors
-      .array()
-      .map((error) => error.msg)
-      .join(", ");
-    return next(new ErrorHandler(errorMessages, 400));
-  }
-  
-  return next();
-};
+  const errorMessages = errors
+    .array()
+    .map((error) => error.msg)
+    .join(", ");
 
+  if (errors.isEmpty()) return next();
+  else next(new ErrorHandler(errorMessages, 400));
+};
 
 const registerValidator = () => [
   body("name", "Please Enter Name").notEmpty(),
