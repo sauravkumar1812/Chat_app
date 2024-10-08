@@ -8,16 +8,16 @@ import("dotenv").config;
 const  isAuthenticated  =TryCatch(async (req, res, next) => {
 
     const token  = req.cookies["Chat-app-token"];
-     console.log("Token:", token);
+     
     if(!token){
         return next(new ErrorHandler("Not authorized to access this route",401))
     }
     // verify the token
   
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded Data:", decodedData);
+    
     req.user = decodedData._id;
-    console.log("req.user :", req.user);
+    
     next();
 });
 
