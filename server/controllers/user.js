@@ -105,7 +105,7 @@ const searchUser = TryCatch(async (req, res) => {
 });
 
 const sendFriendRequest = TryCatch(async (req, res, next) => {
-     
+  console.log("Authenticated User ID:", req.user);
   const { userId } = req.body;
 
   const request = await Request.findOne({
