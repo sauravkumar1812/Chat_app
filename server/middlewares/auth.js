@@ -4,6 +4,7 @@ import { ErrorHandler } from "../utils/utility.js";
 import { adminSecretKey } from "../app.js";
 import { CHATTU_TOKEN } from "../constants/config.js";
 import("dotenv").config;
+
 const  isAuthenticated  =TryCatch(async (req, res, next) => {
 
     const token  = req.cookies["Chat-app-token"];
@@ -14,8 +15,8 @@ const  isAuthenticated  =TryCatch(async (req, res, next) => {
     // verify the token
   
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-  
-    req.user = decodedData.id;
+    console.log("Decoded Data:", decodedData);
+    req.user = decodedData._id;
     console.log("req.user :", req.user);
     next();
 });
