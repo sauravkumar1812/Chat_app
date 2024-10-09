@@ -1,6 +1,7 @@
 const corsOptions = {
     origin: [
        "https://saurav-chat-app-frontend.netlify.app/",
+       "https://chat-app-7icu.onrender.com",
       "http://localhost:5173",
       "http://localhost:4173",
       process.env.CLIENT_URL,
@@ -9,6 +10,6 @@ const corsOptions = {
     credentials: true,
   };
   
-  const CHATTU_TOKEN = "chattu-token";
+  const CHATTU_TOKEN = "Chat-app-token";
   
   export { corsOptions, CHATTU_TOKEN };

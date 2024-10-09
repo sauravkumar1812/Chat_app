@@ -45,7 +45,7 @@ app.put(
   removeMember
 );
 
-app.delete("/leave/:id", chatIdValidator(), validateHandler, leaveGroup);
+app.delete("/leave/:_id", chatIdValidator(), validateHandler, leaveGroup);
 
 // Send Attachments
 app.post(
