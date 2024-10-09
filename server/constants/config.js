@@ -1,6 +1,6 @@
 const corsOptions = {
     origin: [
-       "https://saurav-chat-app-frontend.netlify.app/",
+       "https://saurav-chat-app-frontend.onrender.com/",
        "https://chat-app-7icu.onrender.com",
       "http://localhost:5173",
       "http://localhost:4173",
