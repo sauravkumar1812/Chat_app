@@ -8,7 +8,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy } from "react";
 import { orange } from "../../constants/color";
 import {
   Add as AddIcon,
@@ -44,7 +44,7 @@ const Header = () => {
     (state) => state.misc
   );
   const { notificationCount } = useSelector((state) => state.chat);
-
+  console.log('Notification Count:', notificationCount);
   const handleMobile = () => dispatch(setIsMobile(true));
 
   const openSearch = () => dispatch(setIsSearch(true));
